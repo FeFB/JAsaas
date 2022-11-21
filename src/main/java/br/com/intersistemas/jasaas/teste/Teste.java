@@ -118,9 +118,9 @@ public class Teste {
                 break;
             case 3:
                 Customer customer = new Customer();
-                customer.setName("Gabriel Caetano");
-                customer.setCpfCnpj("01826141073");
-                customer.setEmail("gabrielvscaetano@gmail.com.br");
+                customer.setName("J Willian");
+                customer.setCpfCnpj("99999999999");
+                customer.setEmail("jwillian@liamg.moc.rb");
                 Customer cCreated = conn.createCustomer(customer);
                 System.out.println("##################################");
                 System.out.println(cCreated);
