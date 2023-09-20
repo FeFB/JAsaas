@@ -8,6 +8,9 @@ package br.com.intersistemas.jasaas.util;
  */
 public enum PaymentEvent {
     PAYMENT_CREATED,// - Geração de nova cobrança.
+    PAYMENT_AWAITING_RISK_ANALYSIS, // Pagamento em cartão aguardando aprovação pela análise manual de risco.
+    PAYMENT_APPROVED_BY_RISK_ANALYSIS, // Pagamento em cartão aprovado pela análise manual de risco.
+    PAYMENT_REPROVED_BY_RISK_ANALYSIS, // Pagamento em cartão reprovado pela análise manual de risco.
     PAYMENT_UPDATED,// - Alteração no vencimento ou valor de cobrança existente.
     PAYMENT_CONFIRMED,// - Cobrança confirmada (pagamento efetuado, porém o saldo ainda não foi disponibilizado).
     PAYMENT_RECEIVED,// - Cobrança recebida.
@@ -15,6 +18,7 @@ public enum PaymentEvent {
     PAYMENT_DELETED,// - Cobrança removida.
     PAYMENT_RESTORED,// - Cobrança restaurada.
     PAYMENT_REFUNDED,// - Cobrança estornada.
+    PAYMENT_REFUND_IN_PROGRESS, //Estorno em processamento (liquidação já está agendada, cobrança será estornada após executar a liquidação).
     PAYMENT_RECEIVED_IN_CASH_UNDONE,// - Recebimento em dinheiro desfeito.
     PAYMENT_CHARGEBACK_REQUESTED,// - Recebido chargeback.
     PAYMENT_CHARGEBACK_DISPUTE,// - Em disputa de chargeback (caso sejam apresentados documentos para contestação).
