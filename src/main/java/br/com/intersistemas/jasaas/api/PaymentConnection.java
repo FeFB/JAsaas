@@ -1,11 +1,9 @@
 package br.com.intersistemas.jasaas.api;
 
-import br.com.intersistemas.jasaas.exception.ConnectionException;
-import br.com.intersistemas.jasaas.util.HttpParamsUtil;
-import br.com.intersistemas.jasaas.util.JsonUtil;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import br.com.intersistemas.jasaas.adapter.AdapterConnection;
 import br.com.intersistemas.jasaas.entity.Payment;
 import br.com.intersistemas.jasaas.entity.PixQrCode;
@@ -13,11 +11,14 @@ import br.com.intersistemas.jasaas.entity.filter.PaymentFilter;
 import br.com.intersistemas.jasaas.entity.meta.DeletedEntityReturn;
 import br.com.intersistemas.jasaas.entity.meta.MetaError;
 import br.com.intersistemas.jasaas.entity.meta.MetaPayment;
-import java.util.Arrays;
+import br.com.intersistemas.jasaas.exception.ConnectionException;
+import br.com.intersistemas.jasaas.util.HttpParamsUtil;
+import br.com.intersistemas.jasaas.util.JsonUtil;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class PaymentConnection extends AbstractConnection {
 
@@ -64,9 +65,7 @@ public class PaymentConnection extends AbstractConnection {
             setLimit(meta.getLimit());
             setOffset(meta.getOffset());
 
-            List<Payment> payments = Arrays.asList(meta.getData());
-
-            return payments;
+            return meta.getData();
 
         } catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(PaymentConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,7 +79,7 @@ public class PaymentConnection extends AbstractConnection {
         return (Payment) JsonUtil.parse(lastResponseJson, Payment.class);
     }
 
-    public List<Payment> getByPayment(String customer_id) throws ConnectionException {
+    public List<Payment> getByCustomer(String customer_id) throws ConnectionException {
         lastResponseJson = adapter.get(endpoint + "/customers/" + customer_id + "/payments");
 
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
@@ -88,24 +87,14 @@ public class PaymentConnection extends AbstractConnection {
         setHasMore(meta.getHasMore());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
-
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public List<Payment> getByExternalReference(String externalReference) throws ConnectionException {
         String url = (endpoint + "/payments?externalReference=" + externalReference);
         lastResponseJson = adapter.get(url);
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public List<Payment> getBySubscriptions(String subscription_id) throws ConnectionException {
@@ -116,11 +105,7 @@ public class PaymentConnection extends AbstractConnection {
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public List<Payment> getByInstallment(String installment) throws ConnectionException {
@@ -130,12 +115,7 @@ public class PaymentConnection extends AbstractConnection {
         setHasMore(meta.getHasMore());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
-
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public Payment createPayment(Payment payment) throws ConnectionException {

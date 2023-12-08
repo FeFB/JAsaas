@@ -64,7 +64,8 @@ public class Teste {
         // 6 get qrcode from payment
         // 7 list subscriptions
         // 8 list customers
-        int tipo = 7;
+        // 9 list payments
+        int tipo = 9;
 
         switch (tipo) {
             case 0:
@@ -195,6 +196,12 @@ public class Teste {
                 // list customers
                 List<Customer> listCustomer = connCustomer.getAll(null, 20, 0);
                 System.out.println(gson.toJson(listCustomer));
+                break;
+
+            case 9:
+                // list customers
+                List<Payment> listPayment = connPayment.getAll(null, 20, 0);
+                System.out.println(gson.toJson(listPayment));
                 break;
             default:
                 break;
