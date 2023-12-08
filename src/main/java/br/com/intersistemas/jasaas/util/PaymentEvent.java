@@ -24,3 +24,4 @@ public enum PaymentEvent {
     PAYMENT_BANK_SLIP_VIEWED,// - Boleto da cobrança visualizado pelo cliente.
     PAYMENT_CHECKOUT_VIEWED, // - Fatura da cobrança visualizada pelo cliente.
 }
+

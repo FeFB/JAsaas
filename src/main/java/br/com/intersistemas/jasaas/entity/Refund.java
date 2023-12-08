@@ -1,9 +1,10 @@
 package br.com.intersistemas.jasaas.entity;
 
-import br.com.intersistemas.jasaas.util.RefundStatus;
+import java.time.LocalDateTime;
+
 import com.google.gson.annotations.Expose;
-import java.math.BigDecimal;
-import java.util.Date;
+
+import br.com.intersistemas.jasaas.util.RefundStatus;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.Date;
 public class Refund {
 
     @Expose
-    private Date dateCreated;
+    private LocalDateTime dateCreated;
     @Expose
     private RefundStatus status;
     @Expose
@@ -27,11 +28,11 @@ public class Refund {
     public Refund() {
     }
     
-    public Date getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 

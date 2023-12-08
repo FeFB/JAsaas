@@ -1,14 +1,42 @@
-# JAsaas [EM DESENVOLVIMENTO]
+![maven](https://badgen.net/badge/maven/3.8.2/blue?icon=maven)
+![java](https://badgen.net/badge/Java/11/red?icon=Java)
+![License](https://badgen.net/badge/License/Apache&nbsp;2.0/green?icon=apach2)
+
+# JAsaas
+
 
 Asaas.com JAVA-SDK
 =================
 
-SDK não-oficial de integração à API do serviço www.asaas.com
+SDK **não-oficial** de integração à API do serviço [Asaas](www.asaas.com)
 
-Instalação
+
+ Instalação
 ----------
 
-Adicione o jar no classhpath da aplicação.
+[Maven central](https://central.sonatype.com/artifact/br.com.intersistemas/JAsaas)
+
+#### Maven 
+```xml
+<dependency>
+    <groupId>br.com.intersistemas</groupId>
+    <artifactId>JAsaas</artifactId>
+    <version>3.8.2</version>
+</dependency>
+```
+#### Gradle
+
+```groovy
+implementation group: 'br.com.intersistemas', name: 'JAsaas', version: '3.8.2'
+```
+#### Grape
+
+```groovy
+@Grapes(
+        @Grab(group='br.com.intersistemas', module='JAsaas', version='3.8.2')
+)
+```
+
 
 Endpoint
 --------
@@ -17,8 +45,8 @@ Caso queira usar a API em modo teste basta especificar o `ambiente` no momento e
 
 ```java
 Asaas asaas = new Asaas(new ApacheHttpClientAdapter(acessToken), Asaas.AMBIENTE_HOMOLOGACAO);
-ou
-Asaas asaas = new Asaas(new ApacheHttpClientAdapter(acessToken), Asaas.AMBIENTE_PRODUCAO);
+        ou
+        Asaas asaas = new Asaas(new ApacheHttpClientAdapter(acessToken), Asaas.AMBIENTE_PRODUCAO);
 ```
 
 
@@ -28,46 +56,46 @@ Clientes
 ```java
 // Retorna a listagem de clientes
 CustomerConnection conn = asaas.customer();
-List<Customer> customers = conn.getAll();
+        List<Customer> customers = conn.getAll();
 
 // Usando o Filter para consultar os dados do cliente
-CustomerConnection conn = asaas.customer();
-CustomerFilter filter = new CustomerFilter();
-filter.setName("Bosco Filho");
-List<Customer> customerList = conn.getAll(filter);
+        CustomerConnection conn = asaas.customer();
+        CustomerFilter filter = new CustomerFilter();
+        filter.setName("Bosco Filho");
+        List<Customer> customerList = conn.getAll(filter);
 
 // Retorna os dados do cliente de acordo com o Id
-CustomerConnection conn = asaas.customer();
-Customer customer = conn.getById("cus_wFkaUbylBKNd");
+        CustomerConnection conn = asaas.customer();
+        Customer customer = conn.getById("cus_wFkaUbylBKNd");
 
 // Retorna os dados do cliente de acordo com o Email
-CustomerConnection conn = asaas.customer();
-Customer customer = conn.getByEmail("bos@liamg.moc.rb");
+        CustomerConnection conn = asaas.customer();
+        Customer customer = conn.getByEmail("bos@liamg.moc.rb");
 
 // Insere um novo cliente
-CustomerConnection conn = asaas.customer();
+        CustomerConnection conn = asaas.customer();
 
-Customer customer = new Customer();
-customer.setName("Bosco Filho");
-customer.setEmail("bos@liamg.moc.rb");
-customer.setMobilePhone("8488888888");
-customer.setCpfCnpj("31890545929");
-customer.setPostalCode("59875-400");
-customer.setAddress("Av. paulista");
-customer.setAddressNumber("858");
-customer.setProvince("Pitimbu");
-customer.setCity("3550308");
+        Customer customer = new Customer();
+        customer.setName("Bosco Filho");
+        customer.setEmail("bos@liamg.moc.rb");
+        customer.setMobilePhone("8488888888");
+        customer.setCpfCnpj("31890545929");
+        customer.setPostalCode("59875-400");
+        customer.setAddress("Av. paulista");
+        customer.setAddressNumber("858");
+        customer.setProvince("Pitimbu");
+        customer.setCity("3550308");
 
-Customer cCreated = conn.createCustomer(customer);
+        Customer cCreated = conn.createCustomer(customer);
 
 // Atualiza os dados do cliente
-CustomerConnection conn = asaas.customer();
-customer.setEmail("bosc@liamg.moc.rb");
-Customer cUpdated = conn.updateCustomer(customer);
+        CustomerConnection conn = asaas.customer();
+        customer.setEmail("bosc@liamg.moc.rb");
+        Customer cUpdated = conn.updateCustomer(customer);
 
 // Deleta uma cliente
-CustomerConnection conn = asaas.customer();
-Boolean deleted = conn.deleteCustomer("cus_uiqd7mD1OFE0");
+        CustomerConnection conn = asaas.customer();
+        Boolean deleted = conn.deleteCustomer("cus_uiqd7mD1OFE0");
 
 ```
 
@@ -78,40 +106,40 @@ Cobranças
 ```java
 // Retorna a listagem de cobranças
 PaymentConnection conn = asaas.payment();
-List<Payment> listaPay = conn.getAll();
+        List<Payment> listaPay = conn.getAll();
 
 // Retorna os dados da cobrança de acordo com o Id
-PaymentConnection conn = asaas.payment();
-Payment payment = conn.getById("pay_495842931739");
+        PaymentConnection conn = asaas.payment();
+        Payment payment = conn.getById("pay_495842931739");
 
 // Retorna a listagem de cobranças de acordo com o Id do Cliente
-PaymentConnection conn = asaas.payment();
-List<Payment> payments = conn.getByCustomer("cus_wFkaUbylBKNd");
+        PaymentConnection conn = asaas.payment();
+        List<Payment> payments = conn.getByCustomer("cus_wFkaUbylBKNd");
 
 // Retorna a listagem de cobranças de acordo com o Id da Assinaturas
-PaymentConnection conn = asaas.payment();
-List<Payment> payments = conn.getBySubscriptions("sub_1cqNggmuHEnE");
+        PaymentConnection conn = asaas.payment();
+        List<Payment> payments = conn.getBySubscriptions("sub_1cqNggmuHEnE");
 
 // Insere uma nova cobrança
-PaymentConnection conn = asaas.payment();
+        PaymentConnection conn = asaas.payment();
 
-Payment p = new Payment();
-p.setCustomer("cus_wFkaUbylBKNd");
-p.setBillingType(Payment.BILLINGTYPE_BOLETO);
-p.setValue(new BigDecimal(100));
-p.setDueDate(new Date());
-p.setDescription("Cobrança INTERPLACAS");        
-p.setExternalReference("15");        
-Payment pCreated = conn.createPayment(p);
+        Payment p = new Payment();
+        p.setCustomer("cus_wFkaUbylBKNd");
+        p.setBillingType(Payment.BILLINGTYPE_BOLETO);
+        p.setValue(new BigDecimal(100));
+        p.setDueDate(new Date());
+        p.setDescription("Cobrança INTERPLACAS");
+        p.setExternalReference("15");
+        Payment pCreated = conn.createPayment(p);
 
 // Atualiza os dados da cobrança
-PaymentConnection conn = asaas.payment();
-p.setValue(new BigDecimal(150));
-Payment pUpdated = conn.updatePayment(p);
+        PaymentConnection conn = asaas.payment();
+        p.setValue(new BigDecimal(150));
+        Payment pUpdated = conn.updatePayment(p);
 
 // Deleta uma cobrança
-PaymentConnection conn = asaas.payment();
-Boolean deleted = conn.deletePayment("pay_495842931739");
+        PaymentConnection conn = asaas.payment();
+        Boolean deleted = conn.deletePayment("pay_495842931739");
 
 ```
 
@@ -158,16 +186,16 @@ Cidades
 ```java
 // Retorna a listagem de cidades
 CityConnection conn = asaas.city();
-List<City> cities = conn.getAll();
-        
+        List<City> cities = conn.getAll();
+
 // Retorna os dados da cidade de acordo com o Id
-CityConnection conn = asaas.city();
-List<City> cities = conn.getyId(7637);
+        CityConnection conn = asaas.city();
+        List<City> cities = conn.getyId(7637);
 
 ```
 
 
-Webhook para cobranças  
+Webhook para cobranças
 ------
 
 ```java
@@ -189,9 +217,7 @@ connWH.updateWebhookConfig(webhookConfig);
 Documentação Oficial
 --------------------
 
-Obs.: Esta é uma API não oficial. Foi feita com base na documentação disponibilizada  [neste link](https://docs.google.com/document/d/1XUJRHY_0nd45CzFK5EmjDK92qgaQJGMxT0rjZriTk-g).
-
-V3: https://asaasv3.docs.apiary.io
+[Asaas - v3](https://docs.asaas.com/reference/comece-por-aqui)
 
 Créditos
 --------
@@ -206,6 +232,7 @@ Créditos
 * João Bosco C M Filho
 * Jefferson Willian da C Lucena
 * Marcio Davi M M
+* João Pedro F S Araújo
 
 
 Licença
@@ -216,7 +243,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+    https://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

@@ -1,18 +1,17 @@
 package br.com.intersistemas.jasaas.entity;
 
-import br.com.intersistemas.jasaas.entity.meta.MetaPayment;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.google.gson.annotations.Expose;
+
 import br.com.intersistemas.jasaas.exception.PaymentException;
 import br.com.intersistemas.jasaas.util.BillingType;
 import br.com.intersistemas.jasaas.util.PaymentStatus;
-import com.google.gson.annotations.Expose;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 /**
- *
  * @author bosco
  */
 public final class Payment {
@@ -27,11 +26,13 @@ public final class Payment {
     @Expose
     private BigDecimal value;
     @Expose
-    private Date dueDate;
+    private LocalDate dueDate;
     @Expose
     private String description;
     @Expose
     private String externalReference;
+    @Expose
+    private String pixQrCodeId;
     @Expose
     private Integer installmentCount;
     @Expose
@@ -49,28 +50,24 @@ public final class Payment {
     @Expose
     private String installmentNumber;
     @Expose
-    private Date creditDate;
-    @Expose
-    private Date estimatedCreditDate;
-    @Expose
     private String transactionReceiptUrl;
     @Expose
     private Boolean anticipated;
     @Expose
     private Boolean anticipable;
     @Expose
-    private Date lastInvoiceViewedDate;
-    @Expose
-    private Date lastBankSlipViewedDate;
-    @Expose
     private Boolean postalService;
     @Expose
-    private Chargeback chargeback;
+    private ChargeBack chargeback;
     @Expose
     private List<Refund> refunds;
 
     @Expose(serialize = false)
-    private Date dateCreated;
+    private LocalDateTime dateCreated;
+    @Expose(serialize = false)
+    private LocalDate creditDate;
+    @Expose(serialize = false)
+    private LocalDate estimatedCreditDate;
     @Expose(serialize = false)
     private String subscription;
     @Expose(serialize = false)
@@ -81,17 +78,21 @@ public final class Payment {
     private PaymentStatus status;
 
     @Expose(serialize = false)
-    private Date originalDueDate;
+    private LocalDate originalDueDate;
     @Expose(serialize = false)
     private BigDecimal originalValue;
     @Expose(serialize = false)
     private BigDecimal interestValue;
     @Expose(serialize = false)
-    private Date confirmedDate;
+    private LocalDate confirmedDate;
     @Expose(serialize = false)
-    private Date paymentDate;
+    private LocalDate paymentDate;
     @Expose(serialize = false)
-    private Date clientPaymentDate;
+    private LocalDate clientPaymentDate;
+    @Expose(serialize = false)
+    private LocalDate lastInvoiceViewedDate;
+    @Expose(serialize = false)
+    private LocalDate lastBankSlipViewedDate;
     @Expose(serialize = false)
     private String invoiceUrl;
     @Expose(serialize = false)
@@ -100,7 +101,6 @@ public final class Payment {
     private String invoiceNumber;
     @Expose(serialize = false)
     private Boolean deleted;
-
     @Expose
     private CreditCard creditCard;
     @Expose
@@ -112,7 +112,6 @@ public final class Payment {
     private List<Split> split;// = new ArrayList<>();
 
     /**
-     *
      * @return Identificador único da cobrança (Gerado pelo Asaas)
      */
     public String getId() {
@@ -120,7 +119,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Identificador único do cliente
      */
     public String getCustomer() {
@@ -128,7 +126,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @param customer Identificador único do cliente
      */
     public void setCustomer(String customer) {
@@ -136,7 +133,21 @@ public final class Payment {
     }
 
     /**
-     *
+     * @return Identificador único do QrCode estático gerado para determinada chave Pix
+     */
+
+    public String getPixQrCodeId() {
+        return pixQrCodeId;
+    }
+
+    /**
+     * @param pixQrCodeId Identificador único do QrCode estático gerado para determinada chave Pix
+     */
+    public void setPixQrCodeId(String pixQrCodeId) {
+        this.pixQrCodeId = pixQrCodeId;
+    }
+
+    /**
      * @return Identificador único da assinatura, quando houver.
      */
     public String getSubscription() {
@@ -144,7 +155,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @param subscription Identificador único da assinatura, quando houver.
      */
     public void setSubscription(String subscription) {
@@ -152,7 +162,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Identificador único do parcelamento (quando cobrança parcelada)
      */
     public String getInstallment() {
@@ -160,9 +169,8 @@ public final class Payment {
     }
 
     /**
-     *
      * @param installment Identificador único do parcelamento (quando cobrança
-     * parcelada)
+     *                    parcelada)
      */
     public void setInstallment(String installment) {
         this.installment = installment;
@@ -223,7 +231,7 @@ public final class Payment {
      *
      * @return creditDate
      */
-    public Date getCreditDate() {
+    public LocalDate getCreditDate() {
         return creditDate;
     }
 
@@ -231,7 +239,7 @@ public final class Payment {
      *
      * @param creditDate
      */
-    public void setCreditDate(Date creditDate) {
+    public void setCreditDate(LocalDate creditDate) {
         this.creditDate = creditDate;
     }
 
@@ -239,7 +247,7 @@ public final class Payment {
      *
      * @return estimatedCreditDate
      */
-    public Date getEstimatedCreditDate() {
+    public LocalDate getEstimatedCreditDate() {
         return estimatedCreditDate;
     }
 
@@ -247,7 +255,7 @@ public final class Payment {
      *
      * @param estimatedCreditDate
      */
-    public void setEstimatedCreditDate(Date estimatedCreditDate) {
+    public void setEstimatedCreditDate(LocalDate estimatedCreditDate) {
         this.estimatedCreditDate = estimatedCreditDate;
     }
 
@@ -307,7 +315,7 @@ public final class Payment {
      *
      * @return lastBankSlipViewedDate
      */
-    public Date getLastBankSlipViewedDate() {
+    public LocalDate getLastBankSlipViewedDate() {
         return lastBankSlipViewedDate;
     }
 
@@ -315,7 +323,7 @@ public final class Payment {
      *
      * @param lastBankSlipViewedDate
      */
-    public void setLastBankSlipViewedDate(Date lastBankSlipViewedDate) {
+    public void setLastBankSlipViewedDate(LocalDate lastBankSlipViewedDate) {
         this.lastBankSlipViewedDate = lastBankSlipViewedDate;
     }
 
@@ -323,7 +331,7 @@ public final class Payment {
      *
      * @return lastInvoiceViewedDate
      */
-    public Date getLastInvoiceViewedDate() {
+    public LocalDate getLastInvoiceViewedDate() {
         return lastInvoiceViewedDate;
     }
 
@@ -331,7 +339,7 @@ public final class Payment {
      *
      * @param lastInvoiceViewedDate
      */
-    public void setLastInvoiceViewedDate(Date lastInvoiceViewedDate) {
+    public void setLastInvoiceViewedDate(LocalDate lastInvoiceViewedDate) {
         this.lastInvoiceViewedDate = lastInvoiceViewedDate;
     }
 
@@ -355,7 +363,7 @@ public final class Payment {
      *
      * @return Informações de estorno se possuir
      */
-    public Chargeback getChargeback() {
+    public ChargeBack getChargeback() {
         return chargeback;
     }
 
@@ -363,7 +371,7 @@ public final class Payment {
      *
      * @param chargeback Informações de estorno se possuir
      */
-    public void setChargeback(Chargeback chargeback) {
+    public void setChargeback(ChargeBack chargeback) {
         this.chargeback = chargeback;
     }
 
@@ -392,7 +400,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @param billingType Forma de pagamento.
      */
     public void setBillingType(BillingType billingType) {
@@ -400,7 +407,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Valor da cobrança
      */
     public BigDecimal getValue() {
@@ -408,7 +414,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @param value Valor da cobrança
      */
     public void setValue(BigDecimal value) {
@@ -416,7 +421,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Valor líquido (calculado pelo Asaas)
      */
     public BigDecimal getNetValue() {
@@ -424,7 +428,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Valor original (preenchido somente quando a cobrança é recebida
      * com valor diferente do cadastrado) (somente leitura)
      */
@@ -433,7 +436,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Valor de multa e juros, quando houver. (somente leitura
      */
     public BigDecimal getInterestValue() {
@@ -441,40 +443,35 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Data de vencimento.
      */
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
     /**
-     *
      * @param dueDate Data de vencimento.
      */
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
     /**
-     *
      * @return Data de vencimento original, definida na criação da cobrança.
      */
-    public Date getOriginalDueDate() {
+    public LocalDate getOriginalDueDate() {
         return originalDueDate;
     }
 
     /**
-     *
      * @param originalDueDate Data de vencimento original, definida na criação
-     * da cobrança.
+     *                        da cobrança.
      */
-    public void setOriginalDueDate(Date originalDueDate) {
+    public void setOriginalDueDate(LocalDate originalDueDate) {
         this.originalDueDate = originalDueDate;
     }
 
     /**
-     *
      * @return Status da cobrança (Verificar tabela de status) (somente leitura)
      */
     public PaymentStatus getStatus() {
@@ -482,7 +479,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Descrição da cobrança
      */
     public String getDescription() {
@@ -490,7 +486,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @param description Descrição da cobrança
      */
     public void setDescription(String description) {
@@ -498,7 +493,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Link público para a fatura (somente leitura)
      */
     public String getInvoiceUrl() {
@@ -506,7 +500,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Número da fatura (único) (somente leitura)
      */
     public String getInvoiceNumber() {
@@ -514,7 +507,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @return Número de parcelas (somente no caso de cobrança parcelada)
      */
     public Integer getInstallmentCount() {
@@ -522,16 +514,14 @@ public final class Payment {
     }
 
     /**
-     *
      * @param installmentCount Número de parcelas (somente no caso de cobrança
-     * parcelada)
+     *                         parcelada)
      */
     public void setInstallmentCount(Integer installmentCount) {
         this.installmentCount = installmentCount;
     }
 
     /**
-     *
      * @return Valor da parcela (obrigatório quando informado installmentCount >
      * 1)
      */
@@ -540,16 +530,14 @@ public final class Payment {
     }
 
     /**
-     *
      * @param installmentValue Valor da parcela (obrigatório quando informado
-     * installmentCount > 1)
+     *                         installmentCount > 1)
      */
     public void setInstallmentValue(BigDecimal installmentValue) {
         this.installmentValue = installmentValue;
     }
 
     /**
-     *
      * @return Campo livre, pode ser usado para pesquisa
      */
     public String getExternalReference() {
@@ -557,7 +545,6 @@ public final class Payment {
     }
 
     /**
-     *
      * @param externalReference Campo livre, pode ser usado para pesquisa
      */
     public void setExternalReference(String externalReference) {
@@ -588,35 +575,35 @@ public final class Payment {
         this.fine = fine;
     }
 
-    public Date getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Date getConfirmedDate() {
+    public LocalDate getConfirmedDate() {
         return confirmedDate;
     }
 
-    public void setConfirmedDate(Date confirmedDate) {
+    public void setConfirmedDate(LocalDate confirmedDate) {
         this.confirmedDate = confirmedDate;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public Date getClientPaymentDate() {
+    public LocalDate getClientPaymentDate() {
         return clientPaymentDate;
     }
 
-    public void setClientPaymentDate(Date clientPaymentDate) {
+    public void setClientPaymentDate(LocalDate clientPaymentDate) {
         this.clientPaymentDate = clientPaymentDate;
     }
 
@@ -719,12 +706,7 @@ public final class Payment {
     }
 
     public void validate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        if (dueDate.before(calendar.getTime())) {
+        if (dueDate.isBefore(LocalDate.now())) {
             throw new PaymentException(500, "Data de vencimento inválida. A data de vencimento deve ser maior ou igual a hoje. Data informada: " + dueDate);
         }
 
@@ -733,7 +715,7 @@ public final class Payment {
             throw new PaymentException(500, "O campo descrição possui limite de 255 caracteres. Tamanho informado: " + description.length());
         }
 
-        if (customer == null || "".equals(customer)) {
+        if (customer == null || customer.isEmpty()) {
             throw new PaymentException(500, "Cliente inválido");
         }
 

@@ -1,8 +1,10 @@
 package br.com.intersistemas.jasaas.entity;
 
-import br.com.intersistemas.jasaas.util.DiscountType;
-import com.google.gson.annotations.Expose;
 import java.math.BigDecimal;
+
+import com.google.gson.annotations.Expose;
+
+import br.com.intersistemas.jasaas.util.TypeValue;
 
 /**
  * Informações de multa para pagamento após o vencimento
@@ -13,8 +15,8 @@ public class Fine {
 
     @Expose
     private BigDecimal value;
-    @Expose
-    private DiscountType type;
+    @Expose(serialize = false)
+    private TypeValue type;
 
     public Fine() {
     }
@@ -23,7 +25,7 @@ public class Fine {
         this.value = value;
     }
 
-    public Fine(BigDecimal value, DiscountType type) {
+    public Fine(BigDecimal value, TypeValue type) {
         this.value = value;
         this.type = type;
     }
@@ -46,11 +48,11 @@ public class Fine {
         this.value = value;
     }
 
-    public DiscountType getType() {
+    public TypeValue getType() {
         return type;
     }
 
-    public void setType(DiscountType type) {
+    public void setType(TypeValue type) {
         this.type = type;
     }
 
