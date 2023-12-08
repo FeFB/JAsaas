@@ -63,7 +63,8 @@ public class Teste {
         // 5 create pix key
         // 6 get qrcode from payment
         // 7 list subscriptions
-        int tipo = 8;
+        // 8 list customers
+        int tipo = 7;
 
         switch (tipo) {
             case 0:
@@ -186,8 +187,8 @@ public class Teste {
             case 7:
                 // list subscriptions
                 SubscriptionFilter subscriptionFilter = new SubscriptionFilter();
-                List<Subscription> list = connSubscription.getAll(null, 20, 0);
-                System.out.println(gson.toJson(list));
+                List<Subscription> listSubscriptions = connSubscription.getAll(null, 20, 0);
+                System.out.println(gson.toJson(listSubscriptions));
                 break;
 
             case 8:

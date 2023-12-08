@@ -1,10 +1,15 @@
 package br.com.intersistemas.jasaas.entity.meta;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
+
+import br.com.intersistemas.jasaas.entity.Subscription;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class MetaSubscription {
 
@@ -12,7 +17,7 @@ public class MetaSubscription {
     @Expose private Integer offset;
     @Expose private Boolean hasMore;
 
-    @Expose private ContentSubscription[] data;
+    @Expose private List<Subscription> data;
 
     public Integer getLimit() {
         return limit;
@@ -38,11 +43,11 @@ public class MetaSubscription {
         this.hasMore = hasMore;
     }
 
-    public ContentSubscription[] getData() {
+    public List<Subscription> getData() {
         return data;
     }
 
-    public void setData(ContentSubscription[] data) {
+    public void setData(List<Subscription> data) {
         this.data = data;
     }
 

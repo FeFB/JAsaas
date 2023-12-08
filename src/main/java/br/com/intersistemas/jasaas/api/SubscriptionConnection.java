@@ -1,22 +1,22 @@
 package br.com.intersistemas.jasaas.api;
 
-import br.com.intersistemas.jasaas.exception.ConnectionException;
-import br.com.intersistemas.jasaas.util.HttpParamsUtil;
-import br.com.intersistemas.jasaas.util.JsonUtil;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import br.com.intersistemas.jasaas.adapter.AdapterConnection;
 import br.com.intersistemas.jasaas.entity.Subscription;
 import br.com.intersistemas.jasaas.entity.filter.SubscriptionFilter;
-import br.com.intersistemas.jasaas.entity.meta.ContentSubscription;
 import br.com.intersistemas.jasaas.entity.meta.DeletedEntityReturn;
 import br.com.intersistemas.jasaas.entity.meta.MetaSubscription;
+import br.com.intersistemas.jasaas.exception.ConnectionException;
+import br.com.intersistemas.jasaas.util.HttpParamsUtil;
+import br.com.intersistemas.jasaas.util.JsonUtil;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class SubscriptionConnection extends AbstractConnection {
 
@@ -61,12 +61,7 @@ public class SubscriptionConnection extends AbstractConnection {
             setLimit(meta.getLimit());
             setOffset(meta.getOffset());
 
-            ContentSubscription[] contentList = meta.getData();
-            List<Subscription> subscriptions = new ArrayList<>();
-            for (ContentSubscription content : contentList) {
-                subscriptions.add(content.getSubscription());
-            }
-            return subscriptions;
+            return meta.getData();
         } catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(SubscriptionConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -87,12 +82,7 @@ public class SubscriptionConnection extends AbstractConnection {
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        ContentSubscription[] contentList = meta.getData();
-        List<Subscription> subscriptions = new ArrayList<>();
-        for (ContentSubscription content : contentList) {
-            subscriptions.add(content.getSubscription());
-        }
-        return subscriptions;
+        return meta.getData();
     }
 
     public Subscription createSubscription(Subscription subscription) throws ConnectionException {
