@@ -99,7 +99,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar pela data de pagamento
-     * @param paymentDate on format YYYY-MM-DD
+     * @param paymentDate on format yyyy-MM-dd
      */
     public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
@@ -123,7 +123,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar pela data estimada de crédito.
-     * @param estimatedCreditDate on format YYYY-MM-DD
+     * @param estimatedCreditDate on format yyyy-MM-dd
      */
     public void setEstimatedCreditDate(String estimatedCreditDate) {
         this.estimatedCreditDate = estimatedCreditDate;
@@ -159,7 +159,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de criação inicial
-     * @param dateCreatedGE on format YYYY-MM-DD
+     * @param dateCreatedGE on format yyyy-MM-dd
      */
     public void setDateCreatedGE(String dateCreatedGE) {
         this.dateCreatedGE = dateCreatedGE;
@@ -171,7 +171,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de criação final
-     * @param dateCreatedLE on format YYYY-MM-DD
+     * @param dateCreatedLE on format yyyy-MM-dd
      */
     public void setDateCreatedLE(String dateCreatedLE) {
         this.dateCreatedLE = dateCreatedLE;
@@ -183,7 +183,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de recebimento inicial
-     * @param paymentDateGE on format YYYY-MM-DD
+     * @param paymentDateGE on format yyyy-MM-dd
      */
     public void setPaymentDateGE(String paymentDateGE) {
         this.paymentDateGE = paymentDateGE;
@@ -195,7 +195,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de recebimento final
-     * @param paymentDateLE on format YYYY-MM-DD
+     * @param paymentDateLE on format yyyy-MM-dd
      */
     public void setPaymentDateLE(String paymentDateLE) {
         this.paymentDateLE = paymentDateLE;
@@ -207,7 +207,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de recebimento final
-     * @param estimatedCreditDateGE on format YYYY-MM-DD
+     * @param estimatedCreditDateGE on format yyyy-MM-dd
      */
     public void setEstimatedCreditDateGE(String estimatedCreditDateGE) {
         this.estimatedCreditDateGE = estimatedCreditDateGE;
@@ -219,7 +219,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data estimada de crédito final
-     * @param estimatedCreditDateLE on format YYYY-MM-DD
+     * @param estimatedCreditDateLE on format yyyy-MM-dd
      */
     public void setEstimatedCreditDateLE(String estimatedCreditDateLE) {
         this.estimatedCreditDateLE = estimatedCreditDateLE;
@@ -231,7 +231,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de vencimento inicial
-     * @param dueDateGE on format YYYY-MM-DD
+     * @param dueDateGE on format yyyy-MM-dd
      */
     public void setDueDateGE(String dueDateGE) {
         this.dueDateGE = dueDateGE;
@@ -243,7 +243,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar a partir da data de vencimento final
-     * @param dueDateLE on format YYYY-MM-DD
+     * @param dueDateLE on format yyyy-MM-dd
      */
     public void setDueDateLE(String dueDateLE) {
         this.dueDateLE = dueDateLE;

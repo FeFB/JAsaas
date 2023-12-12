@@ -55,9 +55,7 @@ public class PaymentConnection extends AbstractConnection {
                 url = (endpoint + "/payments" + "?limit=" + limit + "&offset=" + offset);
             }
 
-            //System.out.println(url);
             lastResponseJson = adapter.get(url);
-            //System.out.println(lastResponseJson);
 
             MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 

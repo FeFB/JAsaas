@@ -43,18 +43,6 @@ public class Teste {
 
         Gson gson = new Gson();
 
-        // String dataJson = "{ \"event\": \"PAYMENT_RECEIVED\", \"payment\": {
-        // \"object\": \"payment\", \"id\": \"pay_614896582179\", \"customer\":
-        // \"cus_k9c5dkgf82j9\", \"value\": 500.00, \"netValue\": 495.00,
-        // \"originalValue\": null, \"nossoNumero\": \"80516081\", \"description\":
-        // \"Pedido nr. 10598\", \"billingType\": \"BOLETO\", \"status\": \"RECEIVED\",
-        // \"dueDate\": \"07/05/2016\", \"paymentDate\": \"07/05/2016\", \"invoiceUrl\":
-        // \"https://www.asaas.com/i/614896582179\", \"boletoUrl\":
-        // \"https://www.asaas.com/b/pdf/614896582179\", \"invoiceNumber\":
-        // \"00932305\", \"externalReference\": null, \"deleted\": false } }";
-        // WebhookPayment whp = Webhook.parseToPayment(dataJson);
-        // System.out.println(whp.getEvent());
-        // System.out.println(whp.getPayment().toString());
         // tipos:
         // 0 getpayment,
         // 1 payment create,
@@ -66,7 +54,7 @@ public class Teste {
         // 7 list subscriptions
         // 8 list customers
         // 9 list payments
-        int tipo = 9;
+        int tipo = 7;
 
         switch (tipo) {
             case 0:
@@ -77,44 +65,6 @@ public class Teste {
                     e.printStackTrace();
                 }
                 break;
-            // Atualiza os dados do cliente
-            // cCreated.setEmail("bosc@liamg.moc.rb");
-            // Customer cUpdated = conn.updateCustomer(cCreated);
-            // System.out.println(cUpdated);
-            // Deleta uma cliente
-            // if (conn.deleteCustomer("cus_CwSGC4iu24GE")) {
-            // System.out.println("apagou");
-            // } else {
-            // System.out.println("não apagou");
-            // }
-            // PaymentConnection connPay = asaas.payment();
-            // System.out.println(connPay.getById("pay_035228980021"));
-            //
-            // if (connPay.deletePayment("pay_035228980021")) {
-            // System.out.println("apagou");
-            // } else {
-            // System.out.println("não apagou");
-            // }
-            // String dataJson = "{ \"event\": \"PAYMENT_RECEIVED\", \"payment\": {
-            // \"object\": \"payment\", \"id\": \"pay_614896582179\", \"customer\":
-            // \"cus_k9c5dkgf82j9\", \"value\": 500.00, \"netValue\": 495.00,
-            // \"originalValue\": null, \"nossoNumero\": \"80516081\", \"description\":
-            // \"Pedido nr. 10598\", \"billingType\": \"BOLETO\", \"status\": \"RECEIVED\",
-            // \"dueDate\": \"07/05/2016\", \"paymentDate\": \"07/05/2016\", \"invoiceUrl\":
-            // \"https://www.asaas.com/i/614896582179\", \"boletoUrl\":
-            // \"https://www.asaas.com/b/pdf/614896582179\", \"invoiceNumber\":
-            // \"00932305\", \"externalReference\": null, \"deleted\": false } }";
-            // WebhookPayment whp = Webhook.parseToPayment(dataJson);
-            // System.out.println(whp.getPayment().toString());
-            // Payment p = connPay.getById("pay_681221591809");
-            // p.setDescription("Cobrança GILPLACAS 2");
-            // Payment pUpdated = connPay.updatePayment(p);
-            // System.out.println(pUpdated);
-            // if (connPay.deletePayment("pay_460610752937")) {
-            // System.out.println("apagou");
-            // } else {
-            // System.out.println("não apagou");
-            // }
             case 1:
                 Payment p = new Payment();
                 p.setCustomer("cus_000005031717");
@@ -189,6 +139,9 @@ public class Teste {
             case 7:
                 // list subscriptions
                 SubscriptionFilter subscriptionFilter = new SubscriptionFilter();
+                subscriptionFilter.setOrder("asc");
+                subscriptionFilter.setSort("nextDueDate");
+                subscriptionFilter.setStatus("ACTIVE");
                 List<Subscription> listSubscriptions = connSubscription.getAll(null, 20, 0);
                 System.out.println(gson.toJson(listSubscriptions));
                 break;
@@ -203,7 +156,7 @@ public class Teste {
                 // list payments
 
                 PaymentFilter paymentFilter = new PaymentFilter();
-                paymentFilter.setDueDateGE("2023-12-12");
+                paymentFilter.setDueDateLE("2023-12-12");
                 List<Payment> listPayment = connPayment.getAll(paymentFilter, 20, 0);
                 System.out.println(gson.toJson(listPayment));
                 break;
