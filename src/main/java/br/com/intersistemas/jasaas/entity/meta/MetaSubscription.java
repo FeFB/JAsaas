@@ -15,6 +15,8 @@ public class MetaSubscription {
 
     @Expose private Integer limit;
     @Expose private Integer offset;
+    @Expose private Integer totalCount;
+
     @Expose private Boolean hasMore;
 
     @Expose private List<Subscription> data;
@@ -49,6 +51,14 @@ public class MetaSubscription {
 
     public void setData(List<Subscription> data) {
         this.data = data;
+    }
+    
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
 }

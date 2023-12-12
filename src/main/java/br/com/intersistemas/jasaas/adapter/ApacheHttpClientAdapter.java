@@ -1,13 +1,13 @@
 package br.com.intersistemas.jasaas.adapter;
 
-import br.com.intersistemas.jasaas.exception.ConnectionException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
@@ -16,6 +16,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+
+import br.com.intersistemas.jasaas.exception.ConnectionException;
 
 /**
  *
@@ -42,6 +44,7 @@ public class ApacheHttpClientAdapter implements AdapterConnection {
     @Override
     public String get(String url) throws ConnectionException {
         try {
+            System.out.println("ADAPTER GET: "+url);
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("access_token", accessToken);
             CloseableHttpResponse response = httpclient.execute(httpGet);

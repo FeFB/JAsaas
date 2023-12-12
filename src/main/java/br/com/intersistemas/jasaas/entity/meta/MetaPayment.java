@@ -15,6 +15,7 @@ public class MetaPayment {
 
     @Expose private Integer limit;
     @Expose private Integer offset;
+    @Expose private Integer totalCount;
     @Expose private Boolean hasMore;
 
     // Na homologação foi identificado que o content não possue um objeto payment
@@ -50,6 +51,14 @@ public class MetaPayment {
 
     public void setData(List<Payment> data) {
         this.data = data;
+    }
+    
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
 }

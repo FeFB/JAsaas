@@ -54,7 +54,7 @@ public class Teste {
         // 7 list subscriptions
         // 8 list customers
         // 9 list payments
-        int tipo = 7;
+        int tipo = 9;
 
         switch (tipo) {
             case 0:
@@ -156,8 +156,13 @@ public class Teste {
                 // list payments
 
                 PaymentFilter paymentFilter = new PaymentFilter();
-                paymentFilter.setDueDateLE("2023-12-12");
+                paymentFilter.setDueDateLE("2023-12-31");
+                paymentFilter.setDueDateGE("2023-12-12");
                 List<Payment> listPayment = connPayment.getAll(paymentFilter, 20, 0);
+                System.out.println("connPayment.getOffset(): "+connPayment.getOffset());
+                System.out.println("connPayment.getLimit(): "+connPayment.getLimit());
+                System.out.println("connPayment.getHasMore(): "+connPayment.getHasMore());
+                System.out.println("connPayment.getTotalCount(): "+connPayment.getTotalCount());
                 System.out.println(gson.toJson(listPayment));
                 break;
             default:

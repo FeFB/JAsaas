@@ -58,6 +58,7 @@ public class SubscriptionConnection extends AbstractConnection {
             MetaSubscription meta = (MetaSubscription) JsonUtil.parse(lastResponseJson, MetaSubscription.class);
 
             setHasMore(meta.getHasMore());
+            this.setTotalCount(meta.getTotalCount());
             setLimit(meta.getLimit());
             setOffset(meta.getOffset());
 
@@ -79,6 +80,7 @@ public class SubscriptionConnection extends AbstractConnection {
         MetaSubscription meta = (MetaSubscription) JsonUtil.parse(lastResponseJson, MetaSubscription.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 

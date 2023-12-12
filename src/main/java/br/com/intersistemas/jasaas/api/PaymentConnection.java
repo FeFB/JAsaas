@@ -60,6 +60,7 @@ public class PaymentConnection extends AbstractConnection {
             MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
             setHasMore(meta.getHasMore());
+            this.setTotalCount(meta.getTotalCount());
             setLimit(meta.getLimit());
             setOffset(meta.getOffset());
 
@@ -83,6 +84,7 @@ public class PaymentConnection extends AbstractConnection {
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
         return meta.getData();
@@ -100,6 +102,7 @@ public class PaymentConnection extends AbstractConnection {
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
@@ -111,6 +114,7 @@ public class PaymentConnection extends AbstractConnection {
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
         return meta.getData();
