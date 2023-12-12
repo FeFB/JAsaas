@@ -22,6 +22,7 @@ import br.com.intersistemas.jasaas.entity.Discount;
 import br.com.intersistemas.jasaas.entity.Payment;
 import br.com.intersistemas.jasaas.entity.PixQrCode;
 import br.com.intersistemas.jasaas.entity.Subscription;
+import br.com.intersistemas.jasaas.entity.filter.PaymentFilter;
 import br.com.intersistemas.jasaas.entity.filter.SubscriptionFilter;
 import br.com.intersistemas.jasaas.util.BillingType;
 import br.com.intersistemas.jasaas.util.DiscountType;
@@ -199,8 +200,11 @@ public class Teste {
                 break;
 
             case 9:
-                // list customers
-                List<Payment> listPayment = connPayment.getAll(null, 20, 0);
+                // list payments
+
+                PaymentFilter paymentFilter = new PaymentFilter();
+                paymentFilter.setDueDateGE("2023-12-12");
+                List<Payment> listPayment = connPayment.getAll(paymentFilter, 20, 0);
                 System.out.println(gson.toJson(listPayment));
                 break;
             default:
