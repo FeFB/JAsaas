@@ -2,12 +2,12 @@ package br.com.intersistemas.jasaas.teste;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.time.LocalDate;
-import java.util.Calendar;
 
 import br.com.intersistemas.jasaas.adapter.ApacheHttpClientAdapter;
 import br.com.intersistemas.jasaas.api.Asaas;
@@ -25,38 +25,24 @@ import br.com.intersistemas.jasaas.entity.QRCodePix;
 import br.com.intersistemas.jasaas.entity.Subscription;
 import br.com.intersistemas.jasaas.entity.Tokenize;
 import br.com.intersistemas.jasaas.entity.TokenizeResponse;
-import br.com.intersistemas.jasaas.entity.meta.MetaCustomer;
 import br.com.intersistemas.jasaas.util.BillingType;
 import br.com.intersistemas.jasaas.util.Cycle;
 import br.com.intersistemas.jasaas.util.DiscountType;
-import br.com.intersistemas.jasaas.util.JsonUtil;
 
 /**
  * @author bosco
  */
 public class Teste {
 
-    public static void main(String[] args) throws URISyntaxException, IOException, ClassNotFoundException,
-            KeyStoreException, NoSuchAlgorithmException, CertificateException {
+    public static void main(String[] args) throws URISyntaxException, MalformedURLException, IOException,
+            ClassNotFoundException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
 
-        String acessToken = "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwMDc3NDc6OiRhYWNoX2IwMDBlNjcyLWJhZDgtNGQxMi05MTc2LWQwZjlkYjkxNGFiYg==";
-        Asaas asaas = new Asaas(new ApacheHttpClientAdapter(acessToken), Asaas.AMBIENTE_PRODUCAO);
-        PaymentConnection connPay = asaas.payment();
-        CustomerConnection conn = asaas.customer();
-        SubscriptionConnection subscriptionConnection = asaas.subscription();
+        String acessToken = "";
+        Asaas asaas = new Asaas(new ApacheHttpClientAdapter(acessToken), Asaas.AMBIENTE_HOMOLOGACAO);
+        PaymentConnection connPayment = asaas.payment();
+        CustomerConnection connCustomer = asaas.customer();
+        SubscriptionConnection connSubscription = asaas.subscription();
 
-        // String dataJson = "{ \"event\": \"PAYMENT_RECEIVED\", \"payment\": {
-        // \"object\": \"payment\", \"id\": \"pay_614896582179\", \"customer\":
-        // \"cus_k9c5dkgf82j9\", \"value\": 500.00, \"netValue\": 495.00,
-        // \"originalValue\": null, \"nossoNumero\": \"80516081\", \"description\":
-        // \"Pedido nr. 10598\", \"billingType\": \"BOLETO\", \"status\": \"RECEIVED\",
-        // \"dueDate\": \"07/05/2016\", \"paymentDate\": \"07/05/2016\", \"invoiceUrl\":
-        // \"https://www.asaas.com/i/614896582179\", \"boletoUrl\":
-        // \"https://www.asaas.com/b/pdf/614896582179\", \"invoiceNumber\":
-        // \"00932305\", \"externalReference\": null, \"deleted\": false } }";
-        // WebhookPayment whp = Webhook.parseToPayment(dataJson);
-        // System.out.println(whp.getEvent());
-        // System.out.println(whp.getPayment().toString());
         // tipos:
         // 0 getpayment,
         // 1 payment create,
@@ -65,69 +51,40 @@ public class Teste {
         // 4 create pix charge,
         // 5 create pix key
         // 6 get qrcode from payment
-        int tipo = 6;
+        // 7 list subscriptions
+        // 8 list customers
+        // 9 list payments
+        int tipo = 9;
 
         try {
-            Customer customer = conn.getByExternalReference("550e8400e29b41d4a716446655440000");
+            Customer customer = connCustomer.getByExternalReference("550e8400e29b41d4a716446655440000");
             System.out.println(customer);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // Atualiza os dados do cliente
-        // cCreated.setEmail("bosc@liamg.moc.rb");
-        // Customer cUpdated = conn.updateCustomer(cCreated);
-        // System.out.println(cUpdated);
-        // Deleta uma cliente
-        // if (conn.deleteCustomer("cus_CwSGC4iu24GE")) {
-        // System.out.println("apagou");
-        // } else {
-        // System.out.println("não apagou");
-        // }
-        // PaymentConnection connPay = asaas.payment();
-        // System.out.println(connPay.getById("pay_035228980021"));
-        //
-        // if (connPay.deletePayment("pay_035228980021")) {
-        // System.out.println("apagou");
-        // } else {
-        // System.out.println("não apagou");
-        // }
-        // String dataJson = "{ \"event\": \"PAYMENT_RECEIVED\", \"payment\": {
-        // \"object\": \"payment\", \"id\": \"pay_614896582179\", \"customer\":
-        // \"cus_k9c5dkgf82j9\", \"value\": 500.00, \"netValue\": 495.00,
-        // \"originalValue\": null, \"nossoNumero\": \"80516081\", \"description\":
-        // \"Pedido nr. 10598\", \"billingType\": \"BOLETO\", \"status\": \"RECEIVED\",
-        // \"dueDate\": \"07/05/2016\", \"paymentDate\": \"07/05/2016\", \"invoiceUrl\":
-        // \"https://www.asaas.com/i/614896582179\", \"boletoUrl\":
-        // \"https://www.asaas.com/b/pdf/614896582179\", \"invoiceNumber\":
-        // \"00932305\", \"externalReference\": null, \"deleted\": false } }";
-        // WebhookPayment whp = Webhook.parseToPayment(dataJson);
-        // System.out.println(whp.getPayment().toString());
-        // Payment p = connPay.getById("pay_681221591809");
-        // p.setDescription("Cobrança GILPLACAS 2");
-        // Payment pUpdated = connPay.updatePayment(p);
-        // System.out.println(pUpdated);
-        // if (connPay.deletePayment("pay_460610752937")) {
-        // System.out.println("apagou");
-        // } else {
-        // System.out.println("não apagou");
-        // }
         switch (tipo) {
-
+            case 0:
+                try {
+                    Payment pay = connPayment.getById("pay_2622034647487640");
+                    System.out.println(pay);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
             case 1:
                 Payment p = new Payment();
                 p.setCustomer("cus_000005173845");
                 p.setBillingType(BillingType.BOLETO);
                 p.setValue(new BigDecimal("100.00"));
-                Calendar calendar = Calendar.getInstance();
                 p.setDueDate(LocalDate.now());
                 p.setDescription("Teste boleto com desconto 20.0");
                 p.setDiscount(new Discount(new BigDecimal("20"), 0, DiscountType.FIXED));
                 p.setExternalReference("bol_2020");
                 try {
-                    Payment pCreated = connPay.createPayment(p);
+                    Payment pCreated = connPayment.createPayment(p);
 
-                    LinhaBoleto linhaBoleto = connPay.getLinhaBoletoByIdBoleto(pCreated.getId());
-                    QRCodePix qrCodePix = connPay.getQRCodeByIdBoleto(pCreated.getId());
+                    LinhaBoleto linhaBoleto = connPayment.getLinhaBoletoByIdBoleto(pCreated.getId());
+                    QRCodePix qrCodePix = connPayment.getQRCodeByIdBoleto(pCreated.getId());
 
                     System.out.println(pCreated);
                     System.out.println(linhaBoleto);
@@ -138,20 +95,8 @@ public class Teste {
                 break;
             case 2:
                 try {
-                    // Customer custo = conn.getById("cus_000000064959");
-                    // CustomerFilter customerFilter = new CustomerFilter();
-                    // customerFilter.setCpfCnpj("66998940050");
-                    // List<Customer> customerList = conn.getAll(customerFilter);
-                    //
-                    // for (Customer customer : customerList) {
-                    // System.out.println(customer.getName());
-                    // }
-                    String json = "{\"object\":\"list\",\"hasMore\":false,\"totalCount\":1,\"limit\":10,\"offset\":0,\"data\":[{\"object\":\"customer\",\"id\":\"cus_000004744494\",\"dateCreated\":\"2021-10-13\",\"name\":\"Cliente de teste\",\"email\":\"pedroheavy87@gmail.com\",\"company\":null,\"phone\":null,\"mobilePhone\":null,\"address\":null,\"addressNumber\":null,\"complement\":null,\"province\":null,\"postalCode\":null,\"cpfCnpj\":\"66998940050\",\"personType\":\"FISICA\",\"deleted\":false,\"additionalEmails\":null,\"externalReference\":null,\"notificationDisabled\":false,\"observations\":null,\"city\":null,\"state\":null,\"country\":\"Brasil\",\"foreignCustomer\":false}]}";
-                    MetaCustomer meta = (MetaCustomer) JsonUtil.parse(json, MetaCustomer.class);
-                    for (Customer custo : meta.getData()) {
-                        System.out.println(custo.getId());
-                    }
-
+                    Customer custo = connCustomer.getById("cus_000005031717");
+                    System.out.println(custo);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -159,9 +104,9 @@ public class Teste {
             case 3:
                 Customer customer = new Customer();
                 customer.setName("J Willian");
-                customer.setCpfCnpj("01353121321");
-                customer.setEmail("jwillian@moc.rb");
-                Customer cCreated = conn.createCustomer(customer);
+                customer.setCpfCnpj("99999999999");
+                customer.setEmail("jwillian@liamg.moc.rb");
+                Customer cCreated = connCustomer.createCustomer(customer);
                 System.out.println("##################################");
                 System.out.println(cCreated);
                 System.out.println("##################################");
@@ -191,7 +136,7 @@ public class Teste {
                 break;
             case 5:
 
-                boolean retorno = subscriptionConnection.deleteSubscription("huiasdhguijhuisa");
+                boolean retorno = connSubscription.deleteSubscription("huiasdhguijhuisa");
                 System.out.println(retorno);
 
             case 6:
@@ -218,7 +163,8 @@ public class Teste {
                                 "4848484849"));
                 subscription.setRemoteIp("4848484848");
 
-                Subscription sCreated = subscriptionConnection.createSubscription(subscription);
+                Subscription sCreated = connSubscription.createSubscription(subscription);
+                System.out.println(sCreated);
                 break;
             default:
                 break;

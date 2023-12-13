@@ -1,7 +1,6 @@
 package br.com.intersistemas.jasaas.api;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import br.com.intersistemas.jasaas.adapter.AdapterConnection;
@@ -19,6 +18,7 @@ import br.com.intersistemas.jasaas.util.JsonUtil;
 
 /**
  * @author bosco
+ * @author fndcaique
  */
 public class PaymentConnection extends AbstractConnection {
 
@@ -57,11 +57,12 @@ public class PaymentConnection extends AbstractConnection {
         lastResponseJson = adapter.get(url);
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
+        this.setTotalCount(meta.getTotalCount());
         setHasMore(meta.getHasMore());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        return Arrays.asList(meta.getData());
+        return meta.getData();
     }
 
     public Payment getById(String id) throws ConnectionException {
@@ -69,32 +70,23 @@ public class PaymentConnection extends AbstractConnection {
         return (Payment) JsonUtil.parse(lastResponseJson, Payment.class);
     }
 
-    public List<Payment> getByPayment(String customer_id) throws ConnectionException {
+    public List<Payment> getByCustomer(String customer_id) throws ConnectionException {
         lastResponseJson = adapter.get(endpoint + "/customers/" + customer_id + "/payments");
 
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
-
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public List<Payment> getByExternalReference(String externalReference) throws ConnectionException {
         String url = (endpoint + "/payments?externalReference=" + externalReference);
         lastResponseJson = adapter.get(url);
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public List<Payment> getBySubscriptions(String subscription_id) throws ConnectionException {
@@ -102,14 +94,11 @@ public class PaymentConnection extends AbstractConnection {
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public List<Payment> getByInstallment(String installment) throws ConnectionException {
@@ -117,14 +106,10 @@ public class PaymentConnection extends AbstractConnection {
         MetaPayment meta = (MetaPayment) JsonUtil.parse(lastResponseJson, MetaPayment.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
-
-        Payment[] contentList = meta.getData();
-        if (contentList.length == 0) {
-            return null;
-        }
-        return Arrays.asList(contentList);
+        return meta.getData();
     }
 
     public Payment createPayment(Payment payment) throws ConnectionException {

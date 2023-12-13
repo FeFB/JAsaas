@@ -20,9 +20,11 @@ public abstract class AbstractConnection {
     public static final int AMBIENTE_HOMOLOGACAO = 2;
 
     public String endpoint;
+    private Integer totalCount;
     private Integer limit;
     private Integer offset;
     private Boolean hasMore;
+
     
     protected String lastResponseJson;
     
@@ -68,6 +70,12 @@ public abstract class AbstractConnection {
         this.hasMore = hasMore;
     }
     
-    
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
 
 }

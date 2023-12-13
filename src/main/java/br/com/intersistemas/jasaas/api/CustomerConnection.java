@@ -1,23 +1,21 @@
 package br.com.intersistemas.jasaas.api;
 
+import java.io.IOException;
+import java.util.List;
+
+import br.com.intersistemas.jasaas.adapter.AdapterConnection;
 import br.com.intersistemas.jasaas.entity.Customer;
+import br.com.intersistemas.jasaas.entity.filter.CustomerFilter;
+import br.com.intersistemas.jasaas.entity.meta.DeletedEntityReturn;
 import br.com.intersistemas.jasaas.entity.meta.MetaCustomer;
+import br.com.intersistemas.jasaas.entity.meta.MetaError;
 import br.com.intersistemas.jasaas.exception.ConnectionException;
 import br.com.intersistemas.jasaas.util.HttpParamsUtil;
 import br.com.intersistemas.jasaas.util.JsonUtil;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import br.com.intersistemas.jasaas.adapter.AdapterConnection;
-import br.com.intersistemas.jasaas.entity.filter.CustomerFilter;
-import br.com.intersistemas.jasaas.entity.meta.DeletedEntityReturn;
-import br.com.intersistemas.jasaas.entity.meta.MetaError;
-
 /**
  * @author bosco
+ * @author fndcaique
  */
 public class CustomerConnection extends AbstractConnection {
 
@@ -57,15 +55,12 @@ public class CustomerConnection extends AbstractConnection {
         lastResponseJson = adapter.get(url);
         MetaCustomer meta = (MetaCustomer) JsonUtil.parse(lastResponseJson, MetaCustomer.class);
 
+        this.setTotalCount(meta.getTotalCount());
         setHasMore(meta.getHasMore());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        Customer[] contentList = meta.getData();
-        List<Customer> customers = new ArrayList<>();
-
-        Collections.addAll(customers, contentList);
-        return customers;
+        return meta.getData();
     }
 
     public Customer getById(String id) throws ConnectionException {
@@ -77,30 +72,30 @@ public class CustomerConnection extends AbstractConnection {
         lastResponseJson = adapter.get(endpoint + "/customers?email=" + email);
         MetaCustomer meta = (MetaCustomer) JsonUtil.parse(lastResponseJson, MetaCustomer.class);
 
+        this.setTotalCount(meta.getTotalCount());
         setHasMore(meta.getHasMore());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        Customer[] contentList = meta.getData();
-        if (contentList.length == 0) {
+        if (meta.getData().size() == 0) {
             return null;
         }
-        return contentList[0];
+        return meta.getData().get(0);
     }
 
     public Customer getByExternalReference(String externalReference) throws ConnectionException {
         lastResponseJson = adapter.get(endpoint + "/customers?externalReference=" + externalReference);
         MetaCustomer meta = (MetaCustomer) JsonUtil.parse(lastResponseJson, MetaCustomer.class);
 
+        this.setTotalCount(meta.getTotalCount());
         setHasMore(meta.getHasMore());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        Customer[] contentList = meta.getData();
-        if (contentList.length == 0) {
+        if (meta.getData().size() == 0) {
             return null;
         }
-        return contentList[0];
+        return meta.getData().get(0);
     }
 
     public Customer createCustomer(Customer customer) throws ConnectionException {

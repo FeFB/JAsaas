@@ -1,19 +1,24 @@
 package br.com.intersistemas.jasaas.entity.meta;
 
-import br.com.intersistemas.jasaas.entity.Customer;
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
+
+import br.com.intersistemas.jasaas.entity.Customer;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class MetaCustomer {
 
     @Expose private Integer limit;
     @Expose private Integer offset;
+    @Expose private Integer totalCount;
     @Expose private Boolean hasMore;
-
-    @Expose private Customer[] data;
+    
+    @Expose private List<Customer> data;
 
     public Integer getLimit() {
         return limit;
@@ -39,12 +44,19 @@ public class MetaCustomer {
         this.hasMore = hasMore;
     }
 
-    public Customer[] getData() {
+    public List<Customer> getData() {
         return data;
     }
 
-    public void setData(Customer[] data) {
+    public void setData(List<Customer> data) {
         this.data = data;
     }
 
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
 }
