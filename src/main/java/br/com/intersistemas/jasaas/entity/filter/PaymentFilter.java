@@ -14,8 +14,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar pelo Identificador único do cliente
-     * @param customer 
+     * 
+     * @param customer Filtrar pelo Identificador único do cliente
      */
     public void setCustomer(String customer) {
         this.customer = customer;
@@ -26,8 +26,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar pelo nome do grupo de cliente
-     * @param customerGroupName 
+     * 
+     * @param customerGroupName Filtrar pelo nome do grupo de cliente
      */
     public void setCustomerGroupName(String customerGroupName) {
         this.customerGroupName = customerGroupName;
@@ -38,8 +38,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar por forma de pagamento
-     * @param billingType 
+     * 
+     * @param billingType Filtrar por forma de pagamento
      */
     public void setBillingType(String billingType) {
         this.billingType = billingType;
@@ -50,8 +50,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar por status
-     * @param status
+     * 
+     * @param status Filtrar por status
      */
     public void setStatus(String status) {
         this.status = status;
@@ -62,8 +62,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar pelo Identificador único da assinatura
-     * @param subscription
+     * 
+     * @param subscription Filtrar pelo Identificador único da assinatura
      */
     public void setSubscription(String subscription) {
         this.subscription = subscription;
@@ -74,8 +74,7 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar pelo Identificador único do parcelamento
-     * @param installment
+     * @param installment Filtrar pelo Identificador único do parcelamento
      */
     public void setInstallment(String installment) {
         this.installment = installment;
@@ -86,8 +85,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar pelo Identificador do seu sistema
-     * @param externalReference
+     * 
+     * @param externalReference Filtrar pelo Identificador do seu sistema
      */
     public void setExternalReference(String externalReference) {
         this.externalReference = externalReference;
@@ -110,8 +109,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtro para retornar cobranças que possuem ou não nota fiscal.
-     * @param invoiceStatus
+     * 
+     * @param invoiceStatus Filtro para retornar cobranças que possuem ou não nota fiscal.
      */
     public void setInvoiceStatus(String invoiceStatus) {
         this.invoiceStatus = invoiceStatus;
@@ -134,8 +133,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar recebimentos originados de um QrCode estático utilizando o id gerado na hora da criação do QrCode.
-     * @param pixQrCodeId
+     * 
+     * @param pixQrCodeId Filtrar recebimentos originados de um QrCode estático utilizando o id gerado na hora da criação do QrCode.
      */
     public void setPixQrCodeId(String pixQrCodeId) {
         this.pixQrCodeId = pixQrCodeId;
@@ -146,8 +145,8 @@ public class PaymentFilter {
     }
 
     /**
-     * Filtrar registros antecipados ou não
-     * @param anticipated
+     * 
+     * @param anticipated Filtrar registros antecipados ou não
      */
     public void setAnticipated(String anticipated) {
         this.anticipated = anticipated;
@@ -255,7 +254,7 @@ public class PaymentFilter {
 
     /**
      * Filtrar pelo endereço de e-mail do usuário que criou a cobrança.
-     * @param user
+     * @param user String com o endereço de e-mail do usuário que criou a cobrança.
      */
     public void setUser(String user) {
         this.user = user;

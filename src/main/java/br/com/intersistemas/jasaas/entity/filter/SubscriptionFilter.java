@@ -19,7 +19,7 @@ public class SubscriptionFilter {
     /**
      * Filtrar pelo Identificador único do cliente
      * 
-     * @param customer
+     * @param customer String com o identificado único do cliente
      */
     public void setCustomer(String customer) {
         this.customer = customer;
@@ -32,7 +32,7 @@ public class SubscriptionFilter {
     /**
      * Filtrar pelo nome do grupo de cliente
      * 
-     * @param customerGroupName
+     * @param customerGroupName String com o nome do grupo
      */
     public void setCustomerGroupName(String customerGroupName) {
         this.customerGroupName = customerGroupName;
@@ -45,7 +45,7 @@ public class SubscriptionFilter {
     /**
      * Filtrar por forma de pagamento
      * 
-     * @param billintType
+     * @param billintType String com a forma de pagamento
      */
     public void setBillintType(String billintType) {
         this.billintType = billintType;
@@ -58,7 +58,7 @@ public class SubscriptionFilter {
     /**
      * Filtrar pelo status
      * 
-     * @param status
+     * @param status String com o Status da Subscription
      */
     public void setStatus(String status) {
         this.status = status;
@@ -71,7 +71,7 @@ public class SubscriptionFilter {
     /**
      * Filtrar pelo Identificador do seu sistema
      * 
-     * @param externalReference
+     * @param externalReference o identificado do seu sistema
      */
     public void setExternalReference(String externalReference) {
         this.externalReference = externalReference;
@@ -82,9 +82,7 @@ public class SubscriptionFilter {
     }
 
     /**
-     * Ordem crescente ou decrescente
-     * 
-     * @param order
+     * @param order Deve ser "asc" para ordem crescente ou "desc" para ordem decrescente
      */
     public void setOrder(String order) {
         this.order = order;
@@ -95,9 +93,8 @@ public class SubscriptionFilter {
     }
 
     /**
-     * Por qual campo será ordenado
      * 
-     * @param sort
+     * @param sort Deve ser o nome de algum atributo do objeto Subscription por qual o resultado será ordenado
      */
     public void setSort(String sort) {
         this.sort = sort;
@@ -108,9 +105,8 @@ public class SubscriptionFilter {
     }
 
     /**
-     * Envie true para retornar somente as assinaturas removidas
      * 
-     * @param deletedOnly
+     * @param deletedOnly Envie true para retornar somente as assinaturas removidas
      */
     public void setDeletedOnly(Boolean deletedOnly) {
         this.deletedOnly = deletedOnly;
@@ -121,9 +117,8 @@ public class SubscriptionFilter {
     }
 
     /**
-     * Envie true para recuperar também as assinaturas removidas
      * 
-     * @param includeDeleted
+     * @param includeDeleted Envie true para recuperar também as assinaturas removidas
      */
     public void setIncludeDeleted(Boolean includeDeleted) {
         this.includeDeleted = includeDeleted;

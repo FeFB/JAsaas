@@ -229,7 +229,7 @@ public final class Payment {
 
     /**
      *
-     * @return creditDate
+     * @return creditDate Data do crédito
      */
     public LocalDate getCreditDate() {
         return creditDate;
@@ -237,7 +237,7 @@ public final class Payment {
 
     /**
      *
-     * @param creditDate
+     * @param creditDate Data do crédito
      */
     public void setCreditDate(LocalDate creditDate) {
         this.creditDate = creditDate;
@@ -245,7 +245,7 @@ public final class Payment {
 
     /**
      *
-     * @return estimatedCreditDate
+     * @return estimatedCreditDate Data de crédito estimada
      */
     public LocalDate getEstimatedCreditDate() {
         return estimatedCreditDate;
@@ -253,7 +253,7 @@ public final class Payment {
 
     /**
      *
-     * @param estimatedCreditDate
+     * @param estimatedCreditDate Data de crédito estimada
      */
     public void setEstimatedCreditDate(LocalDate estimatedCreditDate) {
         this.estimatedCreditDate = estimatedCreditDate;
@@ -313,7 +313,7 @@ public final class Payment {
 
     /**
      *
-     * @return lastBankSlipViewedDate
+     * @return lastBankSlipViewedDate Data da última visualização de boleto bancário
      */
     public LocalDate getLastBankSlipViewedDate() {
         return lastBankSlipViewedDate;
@@ -321,7 +321,7 @@ public final class Payment {
 
     /**
      *
-     * @param lastBankSlipViewedDate
+     * @param lastBankSlipViewedDate Data da última visualização de boleto bancário
      */
     public void setLastBankSlipViewedDate(LocalDate lastBankSlipViewedDate) {
         this.lastBankSlipViewedDate = lastBankSlipViewedDate;
@@ -329,7 +329,7 @@ public final class Payment {
 
     /**
      *
-     * @return lastInvoiceViewedDate
+     * @return lastInvoiceViewedDate Data da última visualização da fatura
      */
     public LocalDate getLastInvoiceViewedDate() {
         return lastInvoiceViewedDate;
@@ -337,7 +337,7 @@ public final class Payment {
 
     /**
      *
-     * @param lastInvoiceViewedDate
+     * @param lastInvoiceViewedDate Data da última visualização da fatura
      */
     public void setLastInvoiceViewedDate(LocalDate lastInvoiceViewedDate) {
         this.lastInvoiceViewedDate = lastInvoiceViewedDate;
@@ -522,7 +522,7 @@ public final class Payment {
     }
 
     /**
-     * @return Valor da parcela (obrigatório quando informado installmentCount >
+     * @return Valor da parcela (obrigatório quando informado installmentCount maior que
      * 1)
      */
     public BigDecimal getInstallmentValue() {
@@ -531,7 +531,7 @@ public final class Payment {
 
     /**
      * @param installmentValue Valor da parcela (obrigatório quando informado
-     *                         installmentCount > 1)
+     *                         installmentCount maior que 1)
      */
     public void setInstallmentValue(BigDecimal installmentValue) {
         this.installmentValue = installmentValue;
