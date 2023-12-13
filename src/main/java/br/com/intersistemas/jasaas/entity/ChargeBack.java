@@ -1,7 +1,9 @@
 package br.com.intersistemas.jasaas.entity;
 
-import br.com.intersistemas.jasaas.util.ChargeBackStatus;
 import com.google.gson.annotations.Expose;
+
+import br.com.intersistemas.jasaas.util.ChargeBackReason;
+import br.com.intersistemas.jasaas.util.ChargeBackStatus;
 
 /**
  * Informações de chargeback caso possuir
@@ -13,5 +15,5 @@ public class ChargeBack {
     @Expose(serialize = false)
     ChargeBackStatus status;
     @Expose(serialize = false)
-    ChargeBackStatus reason;
+    ChargeBackReason reason;
 }

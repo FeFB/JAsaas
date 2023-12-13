@@ -1,11 +1,11 @@
 package br.com.intersistemas.jasaas.util;
 
-import com.google.gson.GsonBuilder;
-
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.google.gson.GsonBuilder;
 
 /**
  * @author bosco

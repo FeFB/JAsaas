@@ -32,7 +32,6 @@ public class WebhookConfigConnection extends AbstractConnection {
     }
 
     public WebhookConfig updateWebhookConfig(WebhookConfig webhookConfig) throws ConnectionException {
-        System.out.println("updateWebhookConfig");
         String webhookConfigJSON = JsonUtil.toJSON(webhookConfig);
         String data = adapter.post((endpoint + "/webhook/"), webhookConfigJSON);
         WebhookConfig subscriptionUpdated = (WebhookConfig) JsonUtil.parse(data, WebhookConfig.class);

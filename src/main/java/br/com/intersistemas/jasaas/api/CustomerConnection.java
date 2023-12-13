@@ -125,7 +125,6 @@ public class CustomerConnection extends AbstractConnection {
     }
 
     public boolean deleteCustomer(String id) throws ConnectionException, IOException {
-        System.out.println("deleteCustomer");
         String data = adapter.delete((endpoint + "/customers/" + id));
         DeletedEntityReturn deleted = (DeletedEntityReturn) JsonUtil.parse(data, DeletedEntityReturn.class);
         return deleted.getDeleted();

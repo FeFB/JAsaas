@@ -711,7 +711,6 @@ public final class Payment {
         }
 
         if (description.length() > 255) {
-            //System.out.println("description: " + description);
             throw new PaymentException(500, "O campo descrição possui limite de 255 caracteres. Tamanho informado: " + description.length());
         }
 

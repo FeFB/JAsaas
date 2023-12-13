@@ -40,7 +40,6 @@ public class ApacheHttpClientAdapter implements AdapterConnection {
     @Override
     public String get(String url) throws ConnectionException {
         try {
-            System.out.println("ADAPTER GET: "+url);
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("access_token", accessToken);
             CloseableHttpResponse response = httpclient.execute(httpGet);

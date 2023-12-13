@@ -22,7 +22,6 @@ public class TokenizeConnection extends AbstractConnection {
     public TokenizeResponse createTokenize(Tokenize tokenize) throws ConnectionException {
         String tokenizeJSON = JsonUtil.toJSON(tokenize);
         try {
-            System.out.println("createTokenize");
             String data = adapter.post((endpoint + "/creditCard/tokenize"), tokenizeJSON);
             TokenizeResponse tokenizeResponse = (TokenizeResponse) JsonUtil.parse(data, TokenizeResponse.class);
             if (tokenizeResponse.getCreditCardToken() == null) {
