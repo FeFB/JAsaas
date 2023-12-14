@@ -91,7 +91,7 @@ public class SubscriptionConnection extends AbstractConnection {
         String subscriptionJSON = JsonUtil.toJSON(subscription);
         if (subscription.getId() == null) {
             try {
-                System.out.println("createSubscription");
+                
                 String data = adapter.post((endpoint + "/subscriptions/"), subscriptionJSON);
                 Subscription subscriptionsCreated = (Subscription) JsonUtil.parse(data, Subscription.class);
                 return subscriptionsCreated;
@@ -106,7 +106,7 @@ public class SubscriptionConnection extends AbstractConnection {
 
     public Subscription updateSubscription(Subscription subscription) throws ConnectionException {
         try {
-            System.out.println("updateSubscription");
+            
             String subscriptionJSON = JsonUtil.toJSON(subscription);
             String data = adapter.post((endpoint + "/subscriptions/" + subscription.getId()), subscriptionJSON);
             Subscription subscriptionUpdated = (Subscription) JsonUtil.parse(data, Subscription.class);
@@ -119,7 +119,7 @@ public class SubscriptionConnection extends AbstractConnection {
 
     public boolean deleteSubscription(String id) throws ConnectionException {
         try {
-            System.out.println("deleteSubscriptions");
+            
             String data = adapter.delete((endpoint + "/subscriptions/" + id));
             DeletedEntityReturn deleted = (DeletedEntityReturn) JsonUtil.parse(data, DeletedEntityReturn.class);
             return deleted.getDeleted();

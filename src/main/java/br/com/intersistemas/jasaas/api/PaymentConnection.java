@@ -124,14 +124,14 @@ public class PaymentConnection extends AbstractConnection {
         String paymentJSON = JsonUtil.toJSON(payment);
         if (payment.getId() == null) {
             try {
-                System.out.println("createPayment");
+                
                 payment.validate();
                 String data = adapter.post((endpoint + "/payments/"), paymentJSON);
-                //System.out.println(data);
+                //
                 Payment paymentCreated = (Payment) JsonUtil.parse(data, Payment.class);
                 if (paymentCreated.getId() == null) {
                     MetaError error = (MetaError) JsonUtil.parse(data, MetaError.class);
-                    //System.out.println(error);
+                    //
                     throw new ConnectionException(500, error.toString());
                 }
                 return paymentCreated;
@@ -146,14 +146,14 @@ public class PaymentConnection extends AbstractConnection {
 
     public Payment updatePayment(Payment payment) throws ConnectionException {
         try {
-            System.out.println("updatePayment");
+            
             String paymentJSON = JsonUtil.toJSON(payment);
             payment.validate();
             String data = adapter.post((endpoint + "/payments/" + payment.getId()), paymentJSON);
             Payment paymentUpdated = (Payment) JsonUtil.parse(data, Payment.class);
             if (paymentUpdated.getId() == null) {
                 MetaError error = (MetaError) JsonUtil.parse(data, MetaError.class);
-                //System.out.println(error);
+                //
                 throw new ConnectionException(500, error.toString());
             }
             return paymentUpdated;
@@ -165,7 +165,7 @@ public class PaymentConnection extends AbstractConnection {
 
     public boolean deletePayment(String id) throws ConnectionException {
         try {
-            System.out.println("deletePayment");
+            
             String data = adapter.delete((endpoint + "/payments/" + id));
             DeletedEntityReturn deleted = (DeletedEntityReturn) JsonUtil.parse(data, DeletedEntityReturn.class);
             return deleted.getDeleted();

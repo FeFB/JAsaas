@@ -99,7 +99,7 @@ Payment p = new Payment();
 p.setCustomer("cus_wFkaUbylBKNd");
 p.setBillingType(Payment.BILLINGTYPE_BOLETO);
 p.setValue(new BigDecimal(100));
-p.setDueDate(new Date());
+p.setDueDate(new LocalDate());
 p.setDescription("Cobrança INTERPLACAS");        
 p.setExternalReference("15");        
 Payment pCreated = conn.createPayment(p);

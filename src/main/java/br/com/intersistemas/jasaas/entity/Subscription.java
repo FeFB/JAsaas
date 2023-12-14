@@ -1,12 +1,13 @@
 package br.com.intersistemas.jasaas.entity;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import com.google.gson.annotations.Expose;
+
 import br.com.intersistemas.jasaas.util.BillingType;
 import br.com.intersistemas.jasaas.util.Cycle;
 import br.com.intersistemas.jasaas.util.SubscriptionStatus;
-import com.google.gson.annotations.Expose;
-
-import java.math.BigDecimal;
-import java.util.Date;
 
 /**
  *
@@ -23,7 +24,7 @@ public final class Subscription {
     @Expose
     private BigDecimal value;
     @Expose
-    private Date nextDueDate;
+    private LocalDate nextDueDate;
     @Expose
     private Discount discount;
     @Expose
@@ -35,12 +36,12 @@ public final class Subscription {
     @Expose
     private String description;
     @Expose
-    private Date endDate;
+    private LocalDate endDate;
     @Expose
     private Integer maxPayments;
 
     @Expose(serialize = false)
-    private Date dateCreated;
+    private LocalDate dateCreated;
     @Expose(serialize = false)
     private SubscriptionStatus status;
 
@@ -100,7 +101,7 @@ public final class Subscription {
      *
      * @return Data de vencimento da próxima cobrança
      */
-    public Date getNextDueDate() {
+    public LocalDate getNextDueDate() {
         return nextDueDate;
     }
 
@@ -108,7 +109,7 @@ public final class Subscription {
      *
      * @param nextDueDate Data de vencimento da próxima cobrança
      */
-    public void setNextDueDate(Date nextDueDate) {
+    public void setNextDueDate(LocalDate nextDueDate) {
         this.nextDueDate = nextDueDate;
     }
 
@@ -199,7 +200,7 @@ public final class Subscription {
      *
      * @return Número máximo de cobranças
      */
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -207,7 +208,7 @@ public final class Subscription {
      *
      * @param endDate Número máximo de cobranças
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
@@ -251,11 +252,11 @@ public final class Subscription {
         this.fine = fine;
     }
 
-    public Date getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 

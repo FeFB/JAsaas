@@ -54,9 +54,9 @@ public class CustomerConnection extends AbstractConnection {
                 url = (endpoint + "/customers" + "?limit=" + limit + "&offset=" + offset);
             }
 
-            //System.out.println(url);
+            //
             lastResponseJson = adapter.get(url);
-            //System.out.println(lastResponseJson);
+            //
 
             MetaCustomer meta = (MetaCustomer) JsonUtil.parse(lastResponseJson, MetaCustomer.class);
 
@@ -95,12 +95,12 @@ public class CustomerConnection extends AbstractConnection {
         String customerJSON = JsonUtil.toJSON(customer);
         if (customer.getId() == null) {
             try {
-                System.out.println("createCustomer");
+                
                 String data = adapter.post((endpoint + "/customers/"), customerJSON);
                 Customer customerCreated = (Customer) JsonUtil.parse(data, Customer.class);
                 if (customerCreated.getId() == null) {
                     MetaError error = (MetaError) JsonUtil.parse(data, MetaError.class);
-                    //System.out.println(error);
+                    //
                     throw new ConnectionException(500, error.toString());
                 }
                 return customerCreated;
@@ -115,13 +115,13 @@ public class CustomerConnection extends AbstractConnection {
 
     public Customer updateCustomer(Customer customer) throws ConnectionException {
         try {
-            System.out.println("updateCustomer");
+            
             String customerJSON = JsonUtil.toJSON(customer);
             String data = adapter.post((endpoint + "/customers/" + customer.getId()), customerJSON);
             Customer customerUpdated = (Customer) JsonUtil.parse(data, Customer.class);
             if (customerUpdated.getId() == null) {
                 MetaError error = (MetaError) JsonUtil.parse(data, MetaError.class);
-                //System.out.println(error);
+                //
                 throw new ConnectionException(500, error.toString());
             }
             return customerUpdated;
@@ -133,7 +133,7 @@ public class CustomerConnection extends AbstractConnection {
 
     public boolean deleteCustomer(String id) throws ConnectionException {
         try {
-            System.out.println("deleteCustomer");
+            
             String data = adapter.delete((endpoint + "/customers/" + id));
             DeletedEntityReturn deleted = (DeletedEntityReturn) JsonUtil.parse(data, DeletedEntityReturn.class);
             return deleted.getDeleted();

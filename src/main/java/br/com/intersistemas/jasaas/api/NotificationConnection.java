@@ -1,15 +1,16 @@
 package br.com.intersistemas.jasaas.api;
 
-import br.com.intersistemas.jasaas.exception.ConnectionException;
-import br.com.intersistemas.jasaas.util.JsonUtil;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import br.com.intersistemas.jasaas.adapter.AdapterConnection;
 import br.com.intersistemas.jasaas.entity.Notification;
-import br.com.intersistemas.jasaas.entity.meta.MetaNotification;
 import br.com.intersistemas.jasaas.entity.meta.DeletedEntityReturn;
-import java.util.Arrays;
+import br.com.intersistemas.jasaas.entity.meta.MetaNotification;
+import br.com.intersistemas.jasaas.exception.ConnectionException;
+import br.com.intersistemas.jasaas.util.JsonUtil;
 
 /**
  *
@@ -84,7 +85,7 @@ public class NotificationConnection extends AbstractConnection {
         String notificationJSON = JsonUtil.toJSON(notification);
         if (notification.getId() == null) {
             try {
-                System.out.println("createNotification");
+                
                 String data = adapter.post((endpoint + "/notifications/"), notificationJSON);
                 Notification notificationCreated = (Notification) JsonUtil.parse(data, Notification.class);
                 return notificationCreated;
@@ -99,7 +100,7 @@ public class NotificationConnection extends AbstractConnection {
 
     public Notification updateNotification(Notification notification) throws ConnectionException {
         try {
-            System.out.println("updateNotification");
+            
             String notificationJSON = JsonUtil.toJSON(notification);
             String data = adapter.post((endpoint + "/notifications/" + notification.getId()), notificationJSON);
             Notification notificationUpdated = (Notification) JsonUtil.parse(data, Notification.class);
@@ -112,7 +113,7 @@ public class NotificationConnection extends AbstractConnection {
 
     public boolean deleteNotification(String id) throws ConnectionException {
         try {
-            System.out.println("deleteNotification");
+            
             String data = adapter.delete((endpoint + "/notifications/" + id));
             DeletedEntityReturn deleted = (DeletedEntityReturn) JsonUtil.parse(data, DeletedEntityReturn.class);
             return deleted.getDeleted();
