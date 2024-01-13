@@ -1,10 +1,15 @@
 package br.com.intersistemas.jasaas.entity.meta;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
+
+import br.com.intersistemas.jasaas.entity.Customer;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class MetaCustomer {
 
@@ -12,7 +17,7 @@ public class MetaCustomer {
     @Expose private Integer offset;
     @Expose private Boolean hasMore;
 
-    @Expose private ContentCustomer[] data;
+    @Expose private List<Customer> data;
 
     public Integer getLimit() {
         return limit;
@@ -38,11 +43,11 @@ public class MetaCustomer {
         this.hasMore = hasMore;
     }
 
-    public ContentCustomer[] getData() {
+    public List<Customer> getData() {
         return data;
     }
 
-    public void setData(ContentCustomer[] data) {
+    public void setData(List<Customer> data) {
         this.data = data;
     }
 

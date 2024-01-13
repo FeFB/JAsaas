@@ -5,12 +5,13 @@
  */
 package br.com.intersistemas.jasaas.api;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import br.com.intersistemas.jasaas.adapter.AdapterConnection;
 import br.com.intersistemas.jasaas.entity.WebhookConfig;
 import br.com.intersistemas.jasaas.exception.ConnectionException;
 import br.com.intersistemas.jasaas.util.JsonUtil;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -36,7 +37,7 @@ public class WebhookConfigConnection extends AbstractConnection {
 
     public WebhookConfig updateWebhookConfig(WebhookConfig webhookConfig) throws ConnectionException {
         try {
-            System.out.println("updateWebhookConfig");
+            
             String webhookConfigJSON = JsonUtil.toJSON(webhookConfig);
             String data = adapter.post((endpoint + "/webhook/"), webhookConfigJSON);
             WebhookConfig subscriptionUpdated = (WebhookConfig) JsonUtil.parse(data, WebhookConfig.class);

@@ -1,8 +1,10 @@
 package br.com.intersistemas.jasaas.entity;
 
-import br.com.intersistemas.jasaas.exception.CustomerException;
+import java.time.LocalDate;
+
 import com.google.gson.annotations.Expose;
-import java.util.Date;
+
+import br.com.intersistemas.jasaas.exception.CustomerException;
 
 /**
  *
@@ -54,7 +56,7 @@ public final class Customer {
     @Expose(serialize = false)
     private Boolean deleted;
     @Expose(serialize = false)
-    private Date dateCreated;
+    private LocalDate dateCreated;
 
     public Customer() {
     }
@@ -278,7 +280,7 @@ public final class Customer {
         this.cpfCnpj = cpfCnpj;
     }
 
-    public Date getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
