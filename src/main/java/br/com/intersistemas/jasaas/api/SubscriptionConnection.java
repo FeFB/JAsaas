@@ -1,22 +1,22 @@
 package br.com.intersistemas.jasaas.api;
 
-import br.com.intersistemas.jasaas.exception.ConnectionException;
-import br.com.intersistemas.jasaas.util.HttpParamsUtil;
-import br.com.intersistemas.jasaas.util.JsonUtil;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import br.com.intersistemas.jasaas.adapter.AdapterConnection;
 import br.com.intersistemas.jasaas.entity.Subscription;
 import br.com.intersistemas.jasaas.entity.filter.SubscriptionFilter;
-import br.com.intersistemas.jasaas.entity.meta.ContentSubscription;
 import br.com.intersistemas.jasaas.entity.meta.DeletedEntityReturn;
 import br.com.intersistemas.jasaas.entity.meta.MetaSubscription;
+import br.com.intersistemas.jasaas.exception.ConnectionException;
+import br.com.intersistemas.jasaas.util.HttpParamsUtil;
+import br.com.intersistemas.jasaas.util.JsonUtil;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class SubscriptionConnection extends AbstractConnection {
 
@@ -58,15 +58,11 @@ public class SubscriptionConnection extends AbstractConnection {
             MetaSubscription meta = (MetaSubscription) JsonUtil.parse(lastResponseJson, MetaSubscription.class);
 
             setHasMore(meta.getHasMore());
+            this.setTotalCount(meta.getTotalCount());
             setLimit(meta.getLimit());
             setOffset(meta.getOffset());
 
-            ContentSubscription[] contentList = meta.getData();
-            List<Subscription> subscriptions = new ArrayList<>();
-            for (ContentSubscription content : contentList) {
-                subscriptions.add(content.getSubscription());
-            }
-            return subscriptions;
+            return meta.getData();
         } catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException ex) {
             Logger.getLogger(SubscriptionConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -84,22 +80,18 @@ public class SubscriptionConnection extends AbstractConnection {
         MetaSubscription meta = (MetaSubscription) JsonUtil.parse(lastResponseJson, MetaSubscription.class);
 
         setHasMore(meta.getHasMore());
+        this.setTotalCount(meta.getTotalCount());
         setLimit(meta.getLimit());
         setOffset(meta.getOffset());
 
-        ContentSubscription[] contentList = meta.getData();
-        List<Subscription> subscriptions = new ArrayList<>();
-        for (ContentSubscription content : contentList) {
-            subscriptions.add(content.getSubscription());
-        }
-        return subscriptions;
+        return meta.getData();
     }
 
     public Subscription createSubscription(Subscription subscription) throws ConnectionException {
         String subscriptionJSON = JsonUtil.toJSON(subscription);
         if (subscription.getId() == null) {
             try {
-                System.out.println("createSubscription");
+                
                 String data = adapter.post((endpoint + "/subscriptions/"), subscriptionJSON);
                 Subscription subscriptionsCreated = (Subscription) JsonUtil.parse(data, Subscription.class);
                 return subscriptionsCreated;
@@ -114,7 +106,7 @@ public class SubscriptionConnection extends AbstractConnection {
 
     public Subscription updateSubscription(Subscription subscription) throws ConnectionException {
         try {
-            System.out.println("updateSubscription");
+            
             String subscriptionJSON = JsonUtil.toJSON(subscription);
             String data = adapter.post((endpoint + "/subscriptions/" + subscription.getId()), subscriptionJSON);
             Subscription subscriptionUpdated = (Subscription) JsonUtil.parse(data, Subscription.class);
@@ -127,7 +119,7 @@ public class SubscriptionConnection extends AbstractConnection {
 
     public boolean deleteSubscription(String id) throws ConnectionException {
         try {
-            System.out.println("deleteSubscriptions");
+            
             String data = adapter.delete((endpoint + "/subscriptions/" + id));
             DeletedEntityReturn deleted = (DeletedEntityReturn) JsonUtil.parse(data, DeletedEntityReturn.class);
             return deleted.getDeleted();

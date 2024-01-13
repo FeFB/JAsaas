@@ -1,15 +1,14 @@
 package br.com.intersistemas.jasaas.entity;
 
-import br.com.intersistemas.jasaas.entity.meta.MetaPayment;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.List;
+
+import com.google.gson.annotations.Expose;
+
 import br.com.intersistemas.jasaas.exception.PaymentException;
 import br.com.intersistemas.jasaas.util.BillingType;
 import br.com.intersistemas.jasaas.util.PaymentStatus;
-import com.google.gson.annotations.Expose;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -27,7 +26,7 @@ public final class Payment {
     @Expose
     private BigDecimal value;
     @Expose
-    private Date dueDate;
+    private LocalDate dueDate;
     @Expose
     private String description;
     @Expose
@@ -49,9 +48,9 @@ public final class Payment {
     @Expose
     private String installmentNumber;
     @Expose
-    private Date creditDate;
+    private LocalDate creditDate;
     @Expose
-    private Date estimatedCreditDate;
+    private LocalDate estimatedCreditDate;
     @Expose
     private String transactionReceiptUrl;
     @Expose
@@ -59,9 +58,9 @@ public final class Payment {
     @Expose
     private Boolean anticipable;
     @Expose
-    private Date lastInvoiceViewedDate;
+    private LocalDate lastInvoiceViewedDate;
     @Expose
-    private Date lastBankSlipViewedDate;
+    private LocalDate lastBankSlipViewedDate;
     @Expose
     private Boolean postalService;
     @Expose
@@ -70,7 +69,7 @@ public final class Payment {
     private List<Refund> refunds;
 
     @Expose(serialize = false)
-    private Date dateCreated;
+    private LocalDate dateCreated;
     @Expose(serialize = false)
     private String subscription;
     @Expose(serialize = false)
@@ -81,17 +80,17 @@ public final class Payment {
     private PaymentStatus status;
 
     @Expose(serialize = false)
-    private Date originalDueDate;
+    private LocalDate originalDueDate;
     @Expose(serialize = false)
     private BigDecimal originalValue;
     @Expose(serialize = false)
     private BigDecimal interestValue;
     @Expose(serialize = false)
-    private Date confirmedDate;
+    private LocalDate confirmedDate;
     @Expose(serialize = false)
-    private Date paymentDate;
+    private LocalDate paymentDate;
     @Expose(serialize = false)
-    private Date clientPaymentDate;
+    private LocalDate clientPaymentDate;
     @Expose(serialize = false)
     private String invoiceUrl;
     @Expose(serialize = false)
@@ -223,7 +222,7 @@ public final class Payment {
      *
      * @return creditDate
      */
-    public Date getCreditDate() {
+    public LocalDate getCreditDate() {
         return creditDate;
     }
 
@@ -231,7 +230,7 @@ public final class Payment {
      *
      * @param creditDate
      */
-    public void setCreditDate(Date creditDate) {
+    public void setCreditDate(LocalDate creditDate) {
         this.creditDate = creditDate;
     }
 
@@ -239,7 +238,7 @@ public final class Payment {
      *
      * @return estimatedCreditDate
      */
-    public Date getEstimatedCreditDate() {
+    public LocalDate getEstimatedCreditDate() {
         return estimatedCreditDate;
     }
 
@@ -247,7 +246,7 @@ public final class Payment {
      *
      * @param estimatedCreditDate
      */
-    public void setEstimatedCreditDate(Date estimatedCreditDate) {
+    public void setEstimatedCreditDate(LocalDate estimatedCreditDate) {
         this.estimatedCreditDate = estimatedCreditDate;
     }
 
@@ -307,7 +306,7 @@ public final class Payment {
      *
      * @return lastBankSlipViewedDate
      */
-    public Date getLastBankSlipViewedDate() {
+    public LocalDate getLastBankSlipViewedDate() {
         return lastBankSlipViewedDate;
     }
 
@@ -315,7 +314,7 @@ public final class Payment {
      *
      * @param lastBankSlipViewedDate
      */
-    public void setLastBankSlipViewedDate(Date lastBankSlipViewedDate) {
+    public void setLastBankSlipViewedDate(LocalDate lastBankSlipViewedDate) {
         this.lastBankSlipViewedDate = lastBankSlipViewedDate;
     }
 
@@ -323,7 +322,7 @@ public final class Payment {
      *
      * @return lastInvoiceViewedDate
      */
-    public Date getLastInvoiceViewedDate() {
+    public LocalDate getLastInvoiceViewedDate() {
         return lastInvoiceViewedDate;
     }
 
@@ -331,7 +330,7 @@ public final class Payment {
      *
      * @param lastInvoiceViewedDate
      */
-    public void setLastInvoiceViewedDate(Date lastInvoiceViewedDate) {
+    public void setLastInvoiceViewedDate(LocalDate lastInvoiceViewedDate) {
         this.lastInvoiceViewedDate = lastInvoiceViewedDate;
     }
 
@@ -444,7 +443,7 @@ public final class Payment {
      *
      * @return Data de vencimento.
      */
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
@@ -452,7 +451,7 @@ public final class Payment {
      *
      * @param dueDate Data de vencimento.
      */
-    public void setDueDate(Date dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -460,7 +459,7 @@ public final class Payment {
      *
      * @return Data de vencimento original, definida na criação da cobrança.
      */
-    public Date getOriginalDueDate() {
+    public LocalDate getOriginalDueDate() {
         return originalDueDate;
     }
 
@@ -469,7 +468,7 @@ public final class Payment {
      * @param originalDueDate Data de vencimento original, definida na criação
      * da cobrança.
      */
-    public void setOriginalDueDate(Date originalDueDate) {
+    public void setOriginalDueDate(LocalDate originalDueDate) {
         this.originalDueDate = originalDueDate;
     }
 
@@ -588,35 +587,35 @@ public final class Payment {
         this.fine = fine;
     }
 
-    public Date getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(LocalDate dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Date getConfirmedDate() {
+    public LocalDate getConfirmedDate() {
         return confirmedDate;
     }
 
-    public void setConfirmedDate(Date confirmedDate) {
+    public void setConfirmedDate(LocalDate confirmedDate) {
         this.confirmedDate = confirmedDate;
     }
 
-    public Date getPaymentDate() {
+    public LocalDate getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
     }
 
-    public Date getClientPaymentDate() {
+    public LocalDate getClientPaymentDate() {
         return clientPaymentDate;
     }
 
-    public void setClientPaymentDate(Date clientPaymentDate) {
+    public void setClientPaymentDate(LocalDate clientPaymentDate) {
         this.clientPaymentDate = clientPaymentDate;
     }
 
@@ -719,17 +718,13 @@ public final class Payment {
     }
 
     public void validate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        if (dueDate.before(calendar.getTime())) {
+        LocalDate nowDate = LocalDate.now();
+        if (dueDate.compareTo(nowDate) < 0) {
             throw new PaymentException(500, "Data de vencimento inválida. A data de vencimento deve ser maior ou igual a hoje. Data informada: " + dueDate);
         }
 
         if (description.length() > 255) {
-            //System.out.println("description: " + description);
+            //
             throw new PaymentException(500, "O campo descrição possui limite de 255 caracteres. Tamanho informado: " + description.length());
         }
 

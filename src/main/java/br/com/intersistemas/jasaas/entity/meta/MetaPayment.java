@@ -1,20 +1,25 @@
 package br.com.intersistemas.jasaas.entity.meta;
 
-import br.com.intersistemas.jasaas.entity.Payment;
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
+
+import br.com.intersistemas.jasaas.entity.Payment;
 
 /**
  *
  * @author bosco
+ * @author fndcaique
  */
 public class MetaPayment {
 
     @Expose private Integer limit;
     @Expose private Integer offset;
+    @Expose private Integer totalCount;
     @Expose private Boolean hasMore;
 
     // Na homologação foi identificado que o content não possue um objeto payment
-    @Expose private Payment[] data;
+    @Expose private List<Payment> data;
 
     public Integer getLimit() {
         return limit;
@@ -40,12 +45,20 @@ public class MetaPayment {
         this.hasMore = hasMore;
     }
 
-    public Payment[] getData() {
+    public List<Payment> getData() {
         return data;
     }
 
-    public void setData(Payment[] data) {
+    public void setData(List<Payment> data) {
         this.data = data;
+    }
+    
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
     }
 
 }
