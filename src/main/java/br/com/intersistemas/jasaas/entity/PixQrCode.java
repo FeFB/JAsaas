@@ -1,6 +1,6 @@
 package br.com.intersistemas.jasaas.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import com.google.gson.annotations.Expose;
 
@@ -18,7 +18,7 @@ public class PixQrCode {
     @Expose
     private String payload;
     @Expose
-    private LocalDate expirationDate;
+    private Date expirationDate;
 
     public PixQrCode() {}
 
@@ -76,7 +76,7 @@ public class PixQrCode {
      *
     * @return expirationDate data de validade do QrCode
      */
-    public LocalDate getExpirationDate() {
+    public Date getExpirationDate() {
         return this.expirationDate;
     }
 
@@ -84,7 +84,7 @@ public class PixQrCode {
      *
      * @param expirationDate data de validade do QrCode
      */
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
     }
 

@@ -1,6 +1,6 @@
 package br.com.intersistemas.jasaas.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import com.google.gson.annotations.Expose;
 
@@ -15,7 +15,7 @@ import br.com.intersistemas.jasaas.util.RefundStatus;
 public class Refund {
 
     @Expose
-    private LocalDate dateCreated;
+    private Date dateCreated;
     @Expose
     private RefundStatus status;
     @Expose
@@ -28,11 +28,11 @@ public class Refund {
     public Refund() {
     }
     
-    public LocalDate getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 

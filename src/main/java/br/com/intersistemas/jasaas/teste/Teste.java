@@ -7,7 +7,7 @@ import java.net.URISyntaxException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
-import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -35,7 +35,7 @@ public class Teste {
     public static void main(String[] args) throws URISyntaxException, MalformedURLException, IOException,
             ClassNotFoundException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
 
-        String acessToken = "";
+        String acessToken = "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAwMDIyNTc6OiRhYWNoXzEwYzk5NjJjLTcwMjMtNDM5My1iNjI1LTVlYTUxYzg0OGE1Mw==";
         Asaas asaas = new Asaas(new ApacheHttpClientAdapter(acessToken), Asaas.AMBIENTE_HOMOLOGACAO);
         PaymentConnection connPayment = asaas.payment();
         CustomerConnection connCustomer = asaas.customer();
@@ -67,10 +67,17 @@ public class Teste {
                 break;
             case 1:
                 Payment p = new Payment();
+
                 p.setCustomer("cus_000005031717");
                 p.setBillingType(BillingType.BOLETO);
                 p.setValue(new BigDecimal("100.00"));
-                p.setDueDate(LocalDate.now());
+                Calendar calendar = Calendar.getInstance();
+                // calendar.set(Calendar.HOUR_OF_DAY, 0);
+                // calendar.set(Calendar.MINUTE, 0);
+                // calendar.set(Calendar.SECOND, 0);
+                // calendar.set(Calendar.MILLISECOND, 0);
+                // calendar.set(Calendar.DAY_OF_MONTH, 04);
+                p.setDueDate(calendar.getTime());
                 p.setDescription("Teste boleto com desconto 20.0");
                 p.setDiscount(new Discount(new BigDecimal("20"), 0, DiscountType.FIXED));
                 p.setExternalReference("bol_2020");
@@ -105,7 +112,13 @@ public class Teste {
                 p2.setCustomer("cus_000005031717");
                 p2.setBillingType(BillingType.PIX);
                 p2.setValue(new BigDecimal("100.00"));
-                p2.setDueDate(LocalDate.now());
+                Calendar calendar2 = Calendar.getInstance();
+                // calendar2.set(Calendar.HOUR_OF_DAY, 0);
+                // calendar2.set(Calendar.MINUTE, 0);
+                // calendar2.set(Calendar.SECOND, 0);
+                // calendar2.set(Calendar.MILLISECOND, 0);
+                // calendar2.set(Calendar.DAY_OF_MONTH, 04);
+                p2.setDueDate(calendar2.getTime());
                 p2.setDescription("Teste boleto com desconto 20.0");
                 p2.setDiscount(new Discount(new BigDecimal("20"), 0, DiscountType.FIXED));
                 p2.setExternalReference("bol_2020");

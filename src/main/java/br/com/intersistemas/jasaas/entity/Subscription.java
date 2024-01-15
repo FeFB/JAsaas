@@ -1,7 +1,7 @@
 package br.com.intersistemas.jasaas.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
 import com.google.gson.annotations.Expose;
 
@@ -24,7 +24,7 @@ public final class Subscription {
     @Expose
     private BigDecimal value;
     @Expose
-    private LocalDate nextDueDate;
+    private Date nextDueDate;
     @Expose
     private Discount discount;
     @Expose
@@ -36,12 +36,12 @@ public final class Subscription {
     @Expose
     private String description;
     @Expose
-    private LocalDate endDate;
+    private Date endDate;
     @Expose
     private Integer maxPayments;
 
     @Expose(serialize = false)
-    private LocalDate dateCreated;
+    private Date dateCreated;
     @Expose(serialize = false)
     private SubscriptionStatus status;
 
@@ -101,7 +101,7 @@ public final class Subscription {
      *
      * @return Data de vencimento da próxima cobrança
      */
-    public LocalDate getNextDueDate() {
+    public Date getNextDueDate() {
         return nextDueDate;
     }
 
@@ -109,7 +109,7 @@ public final class Subscription {
      *
      * @param nextDueDate Data de vencimento da próxima cobrança
      */
-    public void setNextDueDate(LocalDate nextDueDate) {
+    public void setNextDueDate(Date nextDueDate) {
         this.nextDueDate = nextDueDate;
     }
 
@@ -200,7 +200,7 @@ public final class Subscription {
      *
      * @return Número máximo de cobranças
      */
-    public LocalDate getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -208,7 +208,7 @@ public final class Subscription {
      *
      * @param endDate Número máximo de cobranças
      */
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -252,11 +252,11 @@ public final class Subscription {
         this.fine = fine;
     }
 
-    public LocalDate getDateCreated() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
+    public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }
 
