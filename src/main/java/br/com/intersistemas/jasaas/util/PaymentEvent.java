@@ -11,9 +11,12 @@ public enum PaymentEvent {
     PAYMENT_AWAITING_RISK_ANALYSIS, // Pagamento em cartão aguardando aprovação pela análise manual de risco.
     PAYMENT_APPROVED_BY_RISK_ANALYSIS, // Pagamento em cartão aprovado pela análise manual de risco.
     PAYMENT_REPROVED_BY_RISK_ANALYSIS, // Pagamento em cartão reprovado pela análise manual de risco.
+    PAYMENT_AUTHORIZED, // - Pagamento em cartão que foi autorizado e precisa ser capturado.
     PAYMENT_UPDATED,// - Alteração no vencimento ou valor de cobrança existente.
     PAYMENT_CONFIRMED,// - Cobrança confirmada (pagamento efetuado, porém o saldo ainda não foi disponibilizado).
-    PAYMENT_RECEIVED,// - Cobrança recebida.
+    PAYMENT_RECEIVED, // - Cobrança recebida.
+    PAYMENT_CREDIT_CARD_CAPTURE_REFUSED, // - Falha no pagamento de cartão de crédito
+    PAYMENT_ANTICIPATED,// - Cobrança antecipada.
     PAYMENT_OVERDUE,// - Cobrança vencida.
     PAYMENT_DELETED,// - Cobrança removida.
     PAYMENT_RESTORED,// - Cobrança restaurada.
