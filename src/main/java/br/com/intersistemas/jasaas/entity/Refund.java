@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.google.gson.annotations.Expose;
 
+
 import br.com.intersistemas.jasaas.util.RefundStatus;
 
 /**
@@ -15,7 +16,7 @@ import br.com.intersistemas.jasaas.util.RefundStatus;
 public class Refund {
 
     @Expose
-    private Date dateCreated;
+    private String dateCreated;
     @Expose
     private RefundStatus status;
     @Expose
@@ -28,11 +29,11 @@ public class Refund {
     public Refund() {
     }
     
-    public Date getDateCreated() {
+    public String getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public void setDateCreated(String dateCreated) {
         this.dateCreated = dateCreated;
     }
 
