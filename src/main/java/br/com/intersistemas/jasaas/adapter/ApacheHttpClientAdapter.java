@@ -3,7 +3,9 @@ package br.com.intersistemas.jasaas.adapter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.http.entity.ContentType;
 import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.CookieSpecs;
@@ -44,7 +46,7 @@ public class ApacheHttpClientAdapter implements AdapterConnection {
     @Override
     public String get(String url) throws ConnectionException {
         try {
-            
+
             HttpGet httpGet = new HttpGet(url);
             httpGet.addHeader("access_token", accessToken);
             CloseableHttpResponse response = httpclient.execute(httpGet);
@@ -97,8 +99,13 @@ public class ApacheHttpClientAdapter implements AdapterConnection {
             //
             HttpPost httpPost = new HttpPost(url);
             httpPost.addHeader("access_token", accessToken);
+            httpPost.addHeader("Accept", "application/json");
+            httpPost.addHeader("Content-Type", "application/json; charset=UTF-8");
 
-            StringEntity entity = new StringEntity(contentJSON);
+            StringEntity entity = new StringEntity(
+              contentJSON,
+              ContentType.APPLICATION_JSON.withCharset(StandardCharsets.UTF_8)
+            );
             httpPost.setEntity(entity);
 
             CloseableHttpResponse response = httpclient.execute(httpPost);
@@ -107,12 +114,12 @@ public class ApacheHttpClientAdapter implements AdapterConnection {
 
 //            }
             StatusLine status = response.getStatusLine();
-            
+
             if (status.getStatusCode() != 200 && status.getStatusCode() != 400) {
-                
+
                 throw new ConnectionException(status.getStatusCode(), status.getReasonPhrase());
             }
-            
+
             HttpEntity entidade = response.getEntity();
             String retorno = EntityUtils.toString(entidade);
 
