@@ -8,7 +8,7 @@ package br.com.intersistemas.jasaas.util;
  */
 public enum ChargebackReason {
     ABSENCE_OF_PRINT,
-    ASENT_CARD_FRAUD,
+    ABSENT_CARD_FRAUD,
     CARD_ACTIVATED_PHONE_TRANSACTION,
     CARD_FRAUD,
     CARD_RECOVERY_BULLETIN,
